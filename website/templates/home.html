@@ -1,0 +1,73 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+
+<script
+src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+></script>
+
+<script src="{{url_for('static', filename='js/home.js')}}"></script>
+
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+
+<div class="container">
+    <div class="row top-buffer">
+        <div class="col-sm">
+            
+        </div>
+    </div>
+    <form action="/recommendations" method="POST" id="recoForm">
+        <div class="row top-buffer">
+            <div class="col-2">
+                <label>Culture: </label><input type="text" class="form-control hover-zoom" id="culture" name="culture"/>
+            </div>
+            <!-- <div class="col-2">
+                <label>City: </label><input type="text" class="form-control hover-zoom" id="city" name="city" value={{current_user.city}} />
+            </div> -->
+            <div class="col-2">
+                <label for="gender">Gender</label>
+                <select class="custom-select" id="inputGroupSelect01" id="gender" name="gender" value={{current_user.gender}}>
+                    <option value={{current_user.gender}} selected>Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">other</option>
+                </select>
+            </div> 
+            <div class="col-2">
+                <label for="ageGroup">Age Group</label>
+                <select class="custom-select" id="inputGroupSelect02" id="ageGroup" name="ageGroup">
+                    <option value="Kids">Kids</option>
+                    <option value="Teenagers">Teenagers</option>
+                    <option value="Adults">Adults</option>
+                </select>
+            </div> 
+            <div class="form-group col-2">
+                <label for="occasion">Occasion</label>
+                <input class="form-control hover-zoom" size="50" type="text" id="occasion" name="occasion" placeholder="Occasion?">
+            </div>
+            <div class="col-2">
+                <label>Date and Time: </label><input type="datetime-local" class="form-control hover-zoom" id="dateTime" name="dateTime"/>
+            </div>
+            <div class="form-group col-2 mt-2">
+                <br>
+                <button id="go" name="go" type="button" class="btn recoButton1 btn-primary btn-rounded">GO</button>
+            </div>
+        </div>
+        <div class="row top-buffer">
+            <div class="col-12">
+                <div align="center" id="center" style="display:none">
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                  </div>
+            </div>
+        </div>
+        
+    </form>
+</div>
+{% endblock %}

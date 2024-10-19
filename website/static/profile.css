@@ -1,0 +1,40 @@
+
+.prefInput{
+    width:70%;
+}
+
+label {
+    /* Other styling... */
+    text-align: right;
+    clear: both;
+    float:left;
+    margin-right:15px;
+}
+
+.prefDiv{
+    padding: 20px;
+    border: 2px solid #000000;
+    background-color: #c1c1c1;
+}
+.btn-pref{
+    /* border: 5px solid rgb(110, 96, 96); */
+    transition: border 0.5s ease;
+}
+.btn-pref:hover {
+    border: 4px solid #00b3e0;
+    cursor: pointer;
+    transform: scale(1.2);
+}
+.top-buffer {
+    margin-top:100px;
+}
+.top-buffer-md{
+    margin-top: 50px;
+}
+.top-buffer-sm{
+    margin-top: 50px;
+}
+.form-actions {
+    background-color: transparent;
+    text-align: center;
+}

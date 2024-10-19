@@ -1,0 +1,57 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+
+<script
+src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+></script>
+
+<script src="{{url_for('static', filename='js/home.js')}}"></script>
+
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+
+<div class="container">
+    <div class="row top-buffer">
+        <div class="col-sm">
+            
+        </div>
+    </div>
+    <form action="/recommendations" method="POST" id="recoForm">
+        <div class="row top-buffer">
+            <div class="col-8">
+                <input type="text" class="input-klass hover-zoom" id="occasion" name="occasion" placeholder="What's the occasion?">
+            </div>
+            <div class="col-2">
+                <input type="hidden" id="space" value="dummy" >
+            </div>
+            <div class="col-2">
+                <input type="text" class="input-klass-city hover-zoom" id="city" name="city" value={{current_user.city}} >
+            </div>
+        </div>
+        <div class="row top-buffer">
+        <div class="col-4">
+            <div align="center">
+                <button type="button" class="btn btn-light btn-circle btn-xl recoButton1">Go</button>
+            </div>
+        </div>
+        <div class="col-4">
+            <div align="center" id="center" style="display:none">
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+              </div>
+        </div>
+        <div class="col-4">
+            <div align="center">
+                <button type="button" class="btn btn-dark btn-circle btn-xl recoButton2">Lucky</button>
+            </div>
+        </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,129 @@
+{% extends "base.html" %} {% block title %}Profile{% endblock %} {% block
+content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
+<div class="container">
+<div class="prefDiv row top-buffer">
+    <div class="col-sm">
+    <form action="/profile-update", method="POST">
+    <h3 align="center">Profile</h3>
+    <div class="form-group">
+        <label for="id"></label>
+        <input type="hidden" class="form-control" id="userid" name="userid" value={{user.id}}>
+        <label for="email">Email Address</label>
+        <input
+        type="email"
+        class="form-control"
+        id="email"
+        name="email"
+        value={{user.email}}
+        readonly
+        />
+    </div>
+    <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input
+        type="text"
+        class="form-control"
+        id="firstName"
+        value={{user.first_name}}
+        readonly
+        />
+    </div>
+    <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input
+        type="text"
+        class="form-control"
+        id="lastName"
+        value={{user.last_name}}
+        readonly
+        />
+    </div>
+    <div class="form-group">
+        <label for="gender">Gender</label>
+        <input
+        type="text"
+        class="form-control"
+        id="gender"
+        value={{user.gender}}
+        readonly
+        />
+    </div>
+    <div class="form-group">
+        <label for="age">Age</label>
+        <input
+        type="text"
+        class="form-control"
+        id="age"
+        name="age"
+        placeholder="Enter age"
+        value={{user.age}}
+        />
+    </div>
+    <div class="form-group">
+        <label for="city">City</label>
+        <input
+        type="text"
+        class="form-control"
+        id="city"
+        name="city"
+        placeholder="Enter city"
+        value={{user.city}}
+        />
+    </div>
+    <div class="form-group">
+        <label for="phoneNumber">Phone Number</label>
+        <input
+        type="text"
+        class="form-control"
+        id="phoneNumber"
+        name="phoneNumber"
+        placeholder="Enter phone number"
+        value={{user.phone_number}}
+        />
+    </div>
+    <br />
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary btn-pref">Submit</button>
+    </div>
+    </form>
+    </div>
+</div>
+
+<div class="row top-buffer">
+    <div class="prefDiv col-sm">
+    <form enctype='application/json', action="/preferences", method="POST">
+    <h3 align="center">Preferences</h3>
+    <div class="container top-buffer-sm">
+        <div class="row top-buffer-sm">
+            <div class="col-6">
+                <label><button type="button" class="btn btn-danger btn-xl">Color</button></label>
+                <input type="text" class="form-control prefInput" id="colorPref" name="colorPref" value={{prefData['colorPref'] }} placeholder="What's your color of preference?">
+            </div>
+            <div class="col-6">
+                <label><button type="button" class="btn btn-danger btn-xl">Style</button></label>
+                <input type="text" class="form-control prefInput" id="stylePref" name="stylePref" value={{prefData['stylePref'] }} placeholder="What's your style of preference?">
+            </div>
+        </div>
+        <div class="row top-buffer-sm">
+            <div class="col-6">
+                <label><button type="button" class="btn btn-danger btn-xl">Period</button></label>
+                <input type="text" class="form-control prefInput" id="periodPref" name="periodPref" value={{prefData['periodPref'] }} placeholder="Which periods' clothing do you prefer?">
+            </div>
+            <div class="col-6">
+                <label><button type="button" class="btn btn-danger btn-xl">Music</button></label>
+                <input type="text" class="form-control prefInput" id="musicPref" name="musicPref" value={{prefData['musicPref'] }} placeholder="What kind of music do you prefer?">
+            </div>
+        </div>
+
+        <div class="top-buffer-md form-actions">
+            <button type="submit" class="btn btn-primary btn-pref">Submit</button>
+        </div>
+    </div>
+
+
+    </form>
+    </div>
+    </div>
+</div>
+{% endblock %}

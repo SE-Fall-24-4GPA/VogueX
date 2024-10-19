@@ -1,0 +1,63 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='results.css') }}">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="{{url_for('static', filename='js/results.js')}}"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
+    integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc"
+    crossorigin="anonymous"></script>
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+<div class="resultbg">
+    <div class="page-headerx">
+        <div class="container">
+            <div class="text">
+                <span style="--i:-4">V</span>
+                <span style="--i:-3">o</span>
+                <span style="--i:-4">g</span>
+                <span style="--i:-1">u</span>
+                <span style="--i:0">e</span>
+                <span style="--i:1">X</span>
+            </div>
+        </div>
+        <div class="container flow">
+
+            <div class="page-title">Tailor made, just for you.</div>
+            <p class="page-subtitle"></p>
+        </div>
+    </div>
+
+</div>
+<div class="container">
+    <p id="fav_msg" class="bg-success text-white text-center"></p>
+</div>
+
+<div class="media-scroller snaps-inline top-buffer">
+    {% for idx, link in enumerate(ldata) %}
+    <div class="media-element">
+        <img src={{ link }} alt="" id="Myimg{{idx}}">
+        <div class="btn-group" role="group" aria-label="buttonGroup">
+            <button id="show-img" type="button" class="blendbtn btn btn-primary rounded m-3" data-toggle="modal"
+                data-target="#my-modal{{idx}}"><b>View</b></button>
+            <a class="nav-item nav-link nav-text buttonA" id="shop-link{{idx}}" href="/shopping-results?{{link}}"><b>Shop</b></a>
+            <button id="favourite{{idx}}" type="button" class="blendbtn btn btn-primary favourite rounded m-3"><b>Favourite</b></button>
+        </div>
+    </div>
+    <div id="my-modal{{idx}}" class="modal fade" aria-labelledby="my-modalLabel" aria-hidden="true" tabindex="-1"
+        role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src={{ link }} class="img-responsive" style="width: 100%;">
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
