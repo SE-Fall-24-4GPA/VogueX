@@ -21,7 +21,7 @@ recommendationsbp = Blueprint("recommendationsbp", __name__, url_prefix="/")
 
 
 """
-payload = {
+newpayload = {
     "gender" : <gender>
     "masterCategory" : <mastercategory>
     "subCategory" : <subcategory>
@@ -32,7 +32,7 @@ payload = {
 }
 """
 
-@recommendationsbp.route("/recommendations", method=["POST"])
+@recommendationsbp.route("/newrecommendations", method=["POST"])
 def get_recommendations():
     req_json_body = request.json
     gender = ""
