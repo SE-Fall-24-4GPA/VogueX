@@ -6,9 +6,9 @@ from tensorflow.keras.models import load_model
 import pandas as pd
 
 # Define file paths
-MODEL_H5_PATH = 'densenet_model.h5'
-MODEL_PKL_PATH = 'densenet_model.pkl'
-CSV_FILE_PATH = 'batch_embeddings.csv'
+MODEL_H5_PATH = 'VogueX/datasets/densenet_model.h5densenet_model.h5'
+MODEL_PKL_PATH = 'VogueX/datasets/densenet_model.pkl'
+CSV_FILE_PATH = 'VogueX/datasets/batch_embeddings.csv'
 
 # Test if model file is saved as .h5 format
 def test_model_h5_exists():
