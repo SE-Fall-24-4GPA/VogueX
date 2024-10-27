@@ -1,54 +1,93 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
 
-<script
-src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="{{ url_for('static', filename='js/home.js') }}"></script>
 
-<script src="{{url_for('static', filename='js/home.js')}}"></script>
-
-{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
-%}
+{% extends "base.html" %} 
+{% block title %}Home{% endblock %} 
+{% block content %}
 
 <div class="container">
     <div class="row top-buffer">
-        <div class="col-sm">
-            
-        </div>
+        <div class="col-sm"></div>
     </div>
     <form action="/recommendations" method="POST" id="recoForm">
         <div class="row top-buffer">
             <div class="col-2">
-                <label>Culture: </label><input type="text" class="form-control hover-zoom" id="culture" name="culture"/>
-            </div>
-            <!-- <div class="col-2">
-                <label>City: </label><input type="text" class="form-control hover-zoom" id="city" name="city" value={{current_user.city}} />
-            </div> -->
-            <div class="col-2">
                 <label for="gender">Gender</label>
-                <select class="custom-select" id="inputGroupSelect01" id="gender" name="gender" value={{current_user.gender}}>
-                    <option value={{current_user.gender}} selected>Gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">other</option>
+                <select class="custom-select" id="gender" name="gender">
+                    <option value="" selected>Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
                 </select>
-            </div> 
-            <div class="col-2">
-                <label for="ageGroup">Age Group</label>
-                <select class="custom-select" id="inputGroupSelect02" id="ageGroup" name="ageGroup">
-                    <option value="Kids">Kids</option>
-                    <option value="Teenagers">Teenagers</option>
-                    <option value="Adults">Adults</option>
-                </select>
-            </div> 
-            <div class="form-group col-2">
-                <label for="occasion">Occasion</label>
-                <input class="form-control hover-zoom" size="50" type="text" id="occasion" name="occasion" placeholder="Occasion?">
             </div>
             <div class="col-2">
-                <label>Date and Time: </label><input type="datetime-local" class="form-control hover-zoom" id="dateTime" name="dateTime"/>
+                <label for="masterCategory">Master Category</label>
+                <select class="custom-select" id="masterCategory" name="masterCategory">
+                    <option value="" selected>Select Master Category</option>
+                    <option value="Apparel">Apparel</option>
+                    <option value="Accessories">Accessories</option>
+                    <option value="Footwear">Footwear</option>
+                    <option value="Personal Care">Personal Care</option>
+                </select>
             </div>
-            <div class="form-group col-2 mt-2">
-                <br>
+            <div class="col-2">
+                <label for="subCategory">Sub Category</label>
+                <select class="custom-select" id="subCategory" name="subCategory">
+                    <option value="" selected>Select Sub Category</option>
+                    <option value="Topwear">Topwear</option>
+                    <option value="Bottomwear">Bottomwear</option>
+                    <option value="Innerwear">Innerwear</option>
+                    <option value="Dress">Dress</option>
+                    <option value="Bags">Bags</option>
+                </select>
+            </div>
+            <div class="col-2">
+                <label for="articleType">Article Type</label>
+                <select class="custom-select" id="articleType" name="articleType">
+                    <option value="" selected>Select Article Type</option>
+                    <option value="Shirts">Shirts</option>
+                    <option value="T-Shirts">T-Shirts</option>
+                    <option value="Jeans">Jeans</option>
+                    <option value="Saree">Saree</option>
+                    <option value="Skirt">Skirt</option>
+                </select>
+            </div>
+            <div class="col-2">
+                <label for="baseColour">Base Colour</label>
+                <select class="custom-select" id="baseColour" name="baseColour">
+                    <option value="" selected>Select Colour</option>
+                    <option value="Black">Black</option>
+                    <option value="White">White</option>
+                    <option value="Navy Blue">Navy Blue</option>
+                    <option value="Red">Red</option>
+                    <option value="Green">Green</option>
+                </select>
+            </div>
+            <div class="col-2">
+                <label for="season">Season</label>
+                <select class="custom-select" id="season" name="season">
+                    <option value="" selected>Select Season</option>
+                    <option value="Summer">Summer</option>
+                    <option value="Winter">Winter</option>
+                    <option value="Fall">Fall</option>
+                    <option value="Spring">Spring</option>
+                </select>
+            </div>
+        </div>
+        <div class="row top-buffer">
+            <div class="col-2">
+                <label for="usage">Usage</label>
+                <select class="custom-select" id="usage" name="usage">
+                    <option value="" selected>Select Usage</option>
+                    <option value="Casual">Casual</option>
+                    <option value="Formal">Formal</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Party">Party</option>
+                </select>
+            </div>
+            <div class="col-2 mt-4">
                 <button id="go" name="go" type="button" class="btn recoButton1 btn-primary btn-rounded">GO</button>
             </div>
         </div>
@@ -64,10 +103,10 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"
                     <div class="wave"></div>
                     <div class="wave"></div>
                     <div class="wave"></div>
-                  </div>
+                </div>
             </div>
         </div>
-        
     </form>
 </div>
+
 {% endblock %}
