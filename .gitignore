@@ -135,3 +135,6 @@ dmypy.json
 git
 libbz2-dev
 libncursesw5-dev
+
+# Dataset
+datasets/fashion-dataset/
