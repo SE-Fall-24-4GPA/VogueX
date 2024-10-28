@@ -56,6 +56,27 @@ def get_recommendations():
     
     userid = session[contracts.SessionParameters.USERID]
 
+    if contracts.NeWRecommendationContractRequest.GENDER_KEY in req_json_body:
+        gender = req_json_body[contracts.RecommendationContractRequest.GENDER_KEY]
+    
+    if contracts.RecommendationContractRequest.MASTER_CATEGORY_KEY in req_json_body:
+        gender = req_json_body[contracts.RecommendationContractRequest.MASTER_CATEGORY_KEY]
+
+    if contracts.RecommendationContractRequest.GENDER_KEY in req_json_body:
+        gender = req_json_body[contracts.RecommendationContractRequest.GENDER_KEY]
+
+    if contracts.RecommendationContractRequest.GENDER_KEY in req_json_body:
+        gender = req_json_body[contracts.RecommendationContractRequest.GENDER_KEY]
+
+    if contracts.RecommendationContractRequest.GENDER_KEY in req_json_body:
+        gender = req_json_body[contracts.RecommendationContractRequest.GENDER_KEY]
+
+    if contracts.RecommendationContractRequest.GENDER_KEY in req_json_body:
+        gender = req_json_body[contracts.RecommendationContractRequest.GENDER_KEY]
+
+    if contracts.RecommendationContractRequest.GENDER_KEY in req_json_body:
+        gender = req_json_body[contracts.RecommendationContractRequest.GENDER_KEY]
+
 
 # ___________________________________________________________________________________________________________________________
 

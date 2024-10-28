@@ -17,9 +17,22 @@ class RecommendationContractRequest:
     CULTURE_KEY = "culture"
     GENDER_KEY = "gender"
 
+class NewRecommendationContractRequest:
+    # RECOMMENDATION PAYLOAD FIELDS
+    GNDER_KEY = "gender"
+    MASTER_CATEGORY_KEY = "masterCategory"
+    SUB_CATEGORY_KEY = "subCategory"
+    ARTICLE_TYPE_KEY = "articleType"
+    BASE_COLOUR_KEY = "baseColour"
+    SEASON_KEY = "season"
+    USAGE_KEY = "usage"
+
 
 class RecommendationContractResponse:
     LINKS = "links"
+
+class RecommendationContractResponse:
+    IMAGES = "images"
 
 
 class PreferenceContractRequest:
