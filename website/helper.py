@@ -5,6 +5,8 @@ import json
 from . import models
 from . import utils
 
+from recommendation_model import get_recommendations
+
 default_preferences = {
     "male": ["blue shirt", "black pant"],
     "female": ["blue shirt", "black pant"],
@@ -85,3 +87,18 @@ class RecommendationHelper:
             "in " + weather + " weather" + " to a " + occasion)
         links = self.searchAPIObj.image_search(query_keywords, culture=culture)
         return links
+
+class NewRecommendationHelper:
+    def giveRecommendations(self, userid, gender, masterCategory, subCategory, articleType, baseColour, season, usage):
+        input = {
+            'gender': gender,
+            'masterCategory': masterCategory,
+            'subCategory': subCategory,
+            'articleType': articleType,
+            'baseColour': baseColour,
+            'season': season,
+            'usage': usage
+        }
+
+        images = get_recommendations(input)
+        return images
