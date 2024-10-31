@@ -9,6 +9,7 @@ from flask import (
     request,
     session,
     url_for,
+    send_from_directory
 )
 
 from . import contracts
@@ -81,14 +82,25 @@ def get_newrecommendations():
 
     help = helper.NewRecommendationHelper()
     images = help.giveRecommendations(userid, gender, masterCategory, subCategory, articleType, baseColour, season, usage)
-    print(images)
+    # print(images)
 
-    recommendations = dict()
-    recommendations[contracts.NewRecommendationContractResponse.IMAGES] = []
+    recommendations = {
+        contracts.NewRecommendationContractResponse.IMAGES: []
+    }
+
+    # Create a list of image paths relative to the web server's base directory
     for image in images:
-        img_path = 'datasets/fashion-dataset/images/' +  image
-        recommendations[contracts.NewRecommendationContractResponse.IMAGES].append(img_path)
+        recommendations[contracts.NewRecommendationContractResponse.IMAGES].append(image)
+
     return jsonify(recommendations), 200
+
+
+    # recommendations = dict()
+    # recommendations[contracts.NewRecommendationContractResponse.IMAGES] = []
+    # for image in images:
+    #     img_path = 'datasets/fashion-dataset/images/' +  image
+    #     recommendations[contracts.NewRecommendationContractResponse.IMAGES].append(img_path)
+    # return jsonify(recommendations), 200
 
     # return the image path as a response to be displayed in the webpage
 

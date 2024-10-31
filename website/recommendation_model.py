@@ -5,7 +5,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 import pandas as pd
 import numpy as np
 
-def get_recommendations():
+def get_recommendations(user_input):
     # Load dataset
     data = pd.read_csv("datasets/fashion-dataset/styles.csv", on_bad_lines='skip')
     data['image'] = data['id'].astype(str) + ".jpg"
@@ -53,15 +53,15 @@ def get_recommendations():
     encoded_features = feature_extractor(encoded_dataset).numpy()
 
     # Define the input query to get recommendations
-    user_input = {
-        'gender': 'Men',
-        'masterCategory': 'Apparel',
-        'subCategory': 'Topwear',
-        'articleType': 'Shirts',
-        'baseColour': 'Navy Blue',
-        'season': 'Fall',
-        'usage': 'Casual'
-    }
+    # user_input = {
+    #     'gender': 'Men',
+    #     'masterCategory': 'Apparel',
+    #     'subCategory': 'Topwear',
+    #     'articleType': 'Shirts',
+    #     'baseColour': 'Navy Blue',
+    #     'season': 'Fall',
+    #     'usage': 'Casual'
+    # }
 
     encoded_user_input = {feature: label_encoders[feature].fit_transform([value])[0] for feature, value in user_input.items()}
 

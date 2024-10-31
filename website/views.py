@@ -29,15 +29,22 @@ def procResult():
             strLinks += links + " || "
         linksData = strLinks
         return redirect(url_for("views.results", user=current_user, data=linksData))
-
-
-@views.route("/results", methods=["POST", "GET"])
+    
+@views.route('/results')
 @login_required
 def results():
-    linksData = str(request.args.to_dict())[2:-2].split(" || ")
-    return render_template(
-        "results.html", user=current_user, ldata=linksData, enumerate=enumerate
-    )
+    image_paths = request.args.get('images', '').split(',')
+    return render_template('results.html', ldata=image_paths, user=current_user, enumerate=enumerate)
+
+
+
+# @views.route("/results", methods=["POST", "GET"])
+# @login_required
+# def results():
+#     linksData = str(request.args.to_dict())[2:-2].split(" || ")
+#     return render_template(
+#         "results.html", user=current_user, ldata=linksData, enumerate=enumerate
+#     )
 
 
 @views.route("/profile", methods=["POST", "GET"])
