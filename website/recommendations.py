@@ -33,7 +33,7 @@ newpayload = {
 """
 
 @recommendationsbp.route("/newrecommendations", method=["POST"])
-def get_recommendations():
+def get_newrecommendations():
     req_json_body = request.json
     gender = ""
     masterCategory = ""
@@ -56,26 +56,41 @@ def get_recommendations():
     
     userid = session[contracts.SessionParameters.USERID]
 
-    if contracts.NeWRecommendationContractRequest.GENDER_KEY in req_json_body:
-        gender = req_json_body[contracts.RecommendationContractRequest.GENDER_KEY]
+    if contracts.NewRecommendationContractRequest.GENDER_KEY in req_json_body:
+        gender = req_json_body[contracts.NewRecommendationContractRequest.GENDER_KEY]
     
-    if contracts.RecommendationContractRequest.MASTER_CATEGORY_KEY in req_json_body:
-        gender = req_json_body[contracts.RecommendationContractRequest.MASTER_CATEGORY_KEY]
+    if contracts.NewRecommendationContractRequest.MASTER_CATEGORY_KEY in req_json_body:
+        masterCategory = req_json_body[contracts.NewRecommendationContractRequest.MASTER_CATEGORY_KEY]
 
-    if contracts.RecommendationContractRequest.GENDER_KEY in req_json_body:
-        gender = req_json_body[contracts.RecommendationContractRequest.GENDER_KEY]
+    if contracts.NewRecommendationContractRequest.SUB_CATEGORY_KEY in req_json_body:
+        subCategory = req_json_body[contracts.NewRecommendationContractRequest.SUB_CATEGORY_KEY]
 
-    if contracts.RecommendationContractRequest.GENDER_KEY in req_json_body:
-        gender = req_json_body[contracts.RecommendationContractRequest.GENDER_KEY]
+    if contracts.NewRecommendationContractRequest.ARTICLE_TYPE_KEY in req_json_body:
+        articleType = req_json_body[contracts.NewRecommendationContractRequest.ARTICLE_TYPE_KEY]
 
-    if contracts.RecommendationContractRequest.GENDER_KEY in req_json_body:
-        gender = req_json_body[contracts.RecommendationContractRequest.GENDER_KEY]
+    if contracts.NewRecommendationContractRequest.BASE_COLOUR_KEY in req_json_body:
+        baseColour = req_json_body[contracts.NewRecommendationContractRequest.BASE_COLOUR_KEY]
 
-    if contracts.RecommendationContractRequest.GENDER_KEY in req_json_body:
-        gender = req_json_body[contracts.RecommendationContractRequest.GENDER_KEY]
+    if contracts.NewRecommendationContractRequest.SEASON_KEY in req_json_body:
+        season = req_json_body[contracts.NewRecommendationContractRequest.SEASON_KEY]
 
-    if contracts.RecommendationContractRequest.GENDER_KEY in req_json_body:
-        gender = req_json_body[contracts.RecommendationContractRequest.GENDER_KEY]
+    if contracts.NewRecommendationContractRequest.USAGE_KEY in req_json_body:
+        usage = req_json_body[contracts.NewRecommendationContractRequest.USAGE_KEY]
+
+    from . import helper
+
+    help = helper.NewRecommendationHelper()
+    images = help.giveRecommendations(userid, gender, masterCategory, subCategory, articleType, baseColour, season, usage)
+    print(images)
+
+    recommendations = dict()
+    recommendations[contracts.NewRecommendationContractResponse.IMAGES] = []
+    for image in images:
+        img_path = 'datasets/fashion-dataset/images/' +  image
+        recommendations[contracts.NewRecommendationContractResponse.IMAGES].append(img_path)
+    return jsonify(recommendations), 200
+
+    # return the image path as a response to be displayed in the webpage
 
 
 # ___________________________________________________________________________________________________________________________

@@ -19,7 +19,7 @@ class RecommendationContractRequest:
 
 class NewRecommendationContractRequest:
     # RECOMMENDATION PAYLOAD FIELDS
-    GNDER_KEY = "gender"
+    GENDER_KEY = "gender"
     MASTER_CATEGORY_KEY = "masterCategory"
     SUB_CATEGORY_KEY = "subCategory"
     ARTICLE_TYPE_KEY = "articleType"
@@ -31,7 +31,7 @@ class NewRecommendationContractRequest:
 class RecommendationContractResponse:
     LINKS = "links"
 
-class RecommendationContractResponse:
+class NewRecommendationContractResponse:
     IMAGES = "images"
 
 

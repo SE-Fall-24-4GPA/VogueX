@@ -1,78 +1,59 @@
-import pickle
 import os
 import joblib
 import tensorflow as tf
+from sklearn.metrics.pairwise import cosine_similarity
 import pandas as pd
 import numpy as np
-from sklearn.metrics.pairwise import cosine_similarity
-
-# Define the FeatureExtractor class with simple embedding layers for each feature
-@tf.keras.utils.register_keras_serializable()
-class FeatureExtractor(tf.keras.Model):
-    def __init__(self, feature_vocab_sizes, embedding_dim):
-        super(FeatureExtractor, self).__init__()
-        self.embeddings = {
-            feature: tf.keras.layers.Embedding(input_dim=vocab_size, output_dim=embedding_dim)
-            for feature, vocab_size in feature_vocab_sizes.items()
-        }
-
-    def call(self, inputs):
-        # Embed each feature and concatenate all embeddings
-        embedded = [self.embeddings[feature](inputs[feature]) for feature in self.embeddings]
-        concatenated = tf.concat(embedded, axis=1)
-        return concatenated
-    
-    def get_config(self):
-        return {
-            'feature_vocab_sizes': self.feature_vocab_sizes,
-            'embedding_dim': self.embedding_dim,
-            **super(FeatureExtractor, self).get_config()  # Include base class config
-        }
-        
-    @classmethod
-    def from_config(cls, config):
-        feature_vocab_sizes = config.pop('feature_vocab_sizes')
-        embedding_dim = config.pop('embedding_dim')
-        return cls(feature_vocab_sizes, embedding_dim, **config)
 
 def get_recommendations():
-    # Directory where model and encoders are saved
-    model_save_dir = 'datasets/model_params/'
+    # Load dataset
+    data = pd.read_csv("datasets/fashion-dataset/styles.csv", on_bad_lines='skip')
+    data['image'] = data['id'].astype(str) + ".jpg"
 
-    # Load the pre-trained model and specify FeatureExtractor as a custom object
-    with open(os.path.join(model_save_dir, 'text_feature_extractor.pkl'), 'rb') as model_file:
-        loaded_model = pickle.load(model_file)
-    # loaded_model = tf.keras.models.load_model(
-    #     os.path.join(model_save_dir, 'text_feature_extractor.h5'),
-    #     custom_objects={'FeatureExtractor': FeatureExtractor}
-    # )
-
-    # Load label encoders for each feature
+    # Specify the features to be encoded
     features_to_encode = ['gender', 'masterCategory', 'subCategory', 'articleType', 'baseColour', 'season', 'usage']
+
+    # Dictionary to store label encoders for each feature
+    # label_encoders = {feature: LabelEncoder() for feature in features_to_encode}
+    model_save_dir = 'datasets/model_params/'
     label_encoders = {col: joblib.load(os.path.join(model_save_dir, f'{col}_label_encoder.pkl')) for col in features_to_encode}
 
-    # Load dataset and add image filenames
-    csv_path = "datasets/fashion-dataset/styles.csv"
-    df = pd.read_csv(csv_path, on_bad_lines='skip')
-    df['image'] = df['id'].astype(str) + ".jpg"
+    # Apply label encoding to each specified feature
+    for feature in features_to_encode:
+        # Fit the LabelEncoder on the column and transform the data
+        data[feature] = label_encoders[feature].fit_transform(data[feature].fillna("Unknown"))
 
-    # Prepare encoded features for each row in the dataset
-    encoded_data = {col: label_encoders[col].transform(df[col].astype(str)) for col in features_to_encode}
-    dataset_features = loaded_model({col: tf.constant(encoded_data[col]) for col in features_to_encode}).numpy()
+    # Convert the encoded DataFrame into a dictionary of integer arrays for each feature
+    encoded_dataset = {feature: data[feature].values for feature in features_to_encode}
 
-    # Define a function to find top-N similar items
-    def find_similar_items(input_values, model, encoders, dataset_features, top_n=10):
-        # Encode the input query values
-        encoded_input = {col: tf.constant([encoders[col].transform([input_values[col]])[0]]) for col in input_values}
-        input_features = model(encoded_input).numpy()
+    class FeatureExtractor(tf.keras.Model):
+        def __init__(self, vocab_sizes, embedding_dim=8):
+            super(FeatureExtractor, self).__init__()
+            self.embeddings = {
+                feature: tf.keras.layers.Embedding(input_dim=size, output_dim=embedding_dim)
+                for feature, size in vocab_sizes.items()
+            }
 
-        # Calculate cosine similarity between input and dataset features
-        similarities = cosine_similarity(input_features, dataset_features)
-        top_indices = np.argsort(similarities[0])[::-1][:top_n]
-        return df.iloc[top_indices]
+        def call(self, inputs):
+            embedded_features = [self.embeddings[feature](inputs[feature]) for feature in inputs]
+            concatenated = tf.concat(embedded_features, axis=-1)
+            return concatenated
+
+    # Vocabulary sizes for each feature
+    vocab_sizes = {}
+
+    for feature in features_to_encode:
+        encoder = label_encoders[feature]
+        encoded_dataset[feature] = encoder.fit_transform(data[feature].fillna("Unknown"))
+        vocab_sizes[feature] = len(encoder.classes_)
+
+    # Initialize model and process dataset
+    feature_extractor = FeatureExtractor(vocab_sizes, embedding_dim=8)
+    # Assume encoded_dataset is a dictionary of integer-encoded feature columns
+    encoded_features = feature_extractor(encoded_dataset).numpy()
 
     # Define the input query to get recommendations
-    input_values = {
+    user_input = {
         'gender': 'Men',
         'masterCategory': 'Apparel',
         'subCategory': 'Topwear',
@@ -82,11 +63,21 @@ def get_recommendations():
         'usage': 'Casual'
     }
 
-    # Retrieve and display the top 10 similar items
-    similar_items = find_similar_items(input_values, loaded_model, label_encoders, dataset_features, top_n=10)
-    print(similar_items[['productDisplayName', 'image']])
+    encoded_user_input = {feature: label_encoders[feature].fit_transform([value])[0] for feature, value in user_input.items()}
 
-    return similar_items
+    user_input_tensors = {feature: tf.constant([value]) for feature, value in encoded_user_input.items()}
 
-# Run the function to test the model
-_ = get_recommendations()
+    user_features = feature_extractor(user_input_tensors).numpy()
+
+    # Compute cosine similarity
+    similarity_scores = cosine_similarity(user_features, encoded_features)
+    top_10_indices = np.argsort(similarity_scores[0])[::-1][:10]
+
+    # Retrieve top 10 similar items
+    similar_items = data.iloc[top_10_indices]
+    
+    return similar_items['image']
+
+# # Run the function to test the model
+# similar_items = get_recommendations()
+# print(similar_items)
