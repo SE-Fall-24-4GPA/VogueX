@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='results.css') }}">
-
+<title>Favorites</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="{{url_for('static', filename='js/favourites.js')}}"></script>
 <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
@@ -30,18 +30,29 @@
 </div >
 </div>
 <div class="container flow">
-    {% for idx,occasion in enumerate(sorted_fav_list) %}
-<div class="media-scroller snaps-inline top-buffer">
-    {% for idx2, j in enumerate(sorted_fav_list[occasion]) %} 
-    <div class="media-element">
-        <img src={{sorted_fav_list[occasion][idx2]['favourite_url']}} id="{{occasion}}{{idx2}}" >
+	{% if sorted_fav_list %}
+		{% for idx,occasion in enumerate(sorted_fav_list) %}
+			<div class="media-scroller snaps-inline top-buffer">
+			{% for idx2, j in enumerate(sorted_fav_list[occasion]) %} 
+				<div class="media-element">
+					<img src={{sorted_fav_list[occasion][idx2]['favourite_url']}} id="{{occasion}}{{idx2}}" >
+					<p class="text-center text-light">Occasion: {{occasion}}</p>  
+					<button type="button" class="blendbtn btn btn-primary favourite rounded m-3" id="{{occasion}}{{idx2}}"><b>Remove Favourite</b></button>
+				</div>
+			{% endfor %}   
+			</div>  
+		{% endfor %}
+	{% else %}
+	<div style="position: relative; display: inline-block;">
+    <img src="/static/images/dog.jpg" alt="Description" style="width: 100%; height: auto;">
+    <h2 style="position: absolute; top: 20%; left: 60%; color: white; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); font-size: 2vw;">
+        Oopsie-daisy! 🐾 No favorites in sight! Time to sprinkle in some fabulous ones!
+    </h2>
+</div>
 
-        <p class="text-center text-light">Occasion: {{occasion}}</p>  
-        <button type="button" class="blendbtn btn btn-primary favourite rounded m-3" id="{{occasion}}{{idx2}}"><b>Remove Favourite</b></button>
-     
-    </div>
-    {% endfor %}   
-</div>  
-{% endfor %}
+
+
+		
+	{% endif %}
 </div>
 {% endblock %}

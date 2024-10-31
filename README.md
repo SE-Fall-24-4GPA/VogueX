@@ -36,8 +36,8 @@ We suggest Shopping links from e-commerce websites for the selected attires by d
 
 And if this doesn’t seem enough, one can extend this in a thousand different ways, some of which are:
 
-Integrating the health app with it to take an extra step and use the predicted menstrual cycle to enhance the outfit recommendation as to make it more comfortable.
-Introducing a feedback mechanism to keep track of the user’s preferences in order to give better suggestions
+Create history tabulation of preferences
+Store cache for previous 5 prefernces to improve efficiency and reduce load.
 Integrating the calendar app to take care of the important days and send a recommendation accordingly.
 
 We have “A style for every story” so let it be known to the world :)
@@ -60,7 +60,11 @@ Guides on how to install:
   
   create virtualenv:
   
-  `virtualenv venv` 
+  `virtualenv venv`
+
+  Have mysql installed : https://www.mysql.com/downloads/
+    note down its port(default 3306)
+    
 
 ## 2. Deploying
 
@@ -76,6 +80,13 @@ Change working directory to the repository:
 $ cd vogueX---Fashion-Recommender
 
 
+For integration of mysql:
+
+  update __init__.py with credentials for mysql
+
+  and run the SQL schema
+
+
 We have made a python script to run the application.
 Just run 
 
@@ -89,12 +100,9 @@ http://localhost:5000/
 
 
 ## Contributors:
-- Kalyan Karnati (kkarnat)
-- Mukund Varma Pericherla (mperich)
-- Pranavi Sharma Sanganabhatla (psangan)
-- Saketh Vangala (svangal)
-- Srihitha Reddy Kaalam (skaalam)
-
+- Haricharan Bharathi
+- Gokul Prakash Ramesh
+- Raghunandan Ganesh Mante
 
 
 ## License
