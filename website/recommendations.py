@@ -33,7 +33,7 @@ newpayload = {
 }
 """
 
-@recommendationsbp.route("/newrecommendations", method=["POST"])
+@recommendationsbp.route("/newrecommendations", methods=["POST"])
 def get_newrecommendations():
     req_json_body = request.json
     gender = ""

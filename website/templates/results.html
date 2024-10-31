@@ -35,7 +35,7 @@
 <div class="media-scroller snaps-inline top-buffer">
     {% for idx, link in enumerate(ldata) %}
     <div class="media-element">
-        <img src="{{ url_for('views.serve_dataset', filename=link) }}" alt="" id="Myimg{{ idx }}">
+        <img src="{{ url_for('views.serve_images', filename=link) }}" alt="" id="Myimg{{ idx }}">
         <div class="btn-group" role="group" aria-label="buttonGroup">
             <button id="show-img" type="button" class="blendbtn btn btn-primary rounded m-3" data-toggle="modal" data-target="#my-modal{{ idx }}"><b>View</b></button>
             <a class="nav-item nav-link nav-text buttonA" id="shop-link{{ idx }}" href="/shopping-results?{{ link }}"><b>Shop</b></a>
@@ -51,7 +51,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <img src="{{ url_for('views.serve_dataset', filename=link) }}" class="img-responsive" style="width: 100%;">
+                    <img src="{{ url_for('views.serve_images', filename=link) }}" class="img-responsive" style="width: 100%;">
                 </div>
             </div>
         </div>

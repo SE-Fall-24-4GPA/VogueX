@@ -4,6 +4,7 @@ from flask import (
     request,
     redirect,
     url_for,
+    send_from_directory
 )
 
 from flask_login import login_required, current_user
@@ -36,7 +37,9 @@ def results():
     image_paths = request.args.get('images', '').split(',')
     return render_template('results.html', ldata=image_paths, user=current_user, enumerate=enumerate)
 
-
+@views.route('/datasets/fashion-dataset/images/<path:filename>')
+def serve_images(filename):
+    return send_from_directory('datasets/fashion-dataset/images', filename)
 
 # @views.route("/results", methods=["POST", "GET"])
 # @login_required

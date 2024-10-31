@@ -5,6 +5,9 @@ import json
 from . import models
 from . import utils
 
+import sys
+import os
+sys.path.append(os.path.dirname(__file__))
 from recommendation_model import get_recommendations
 
 default_preferences = {
