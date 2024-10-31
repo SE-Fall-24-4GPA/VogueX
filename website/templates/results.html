@@ -32,13 +32,60 @@
     <p id="fav_msg" class="bg-success text-white text-center"></p>
 </div>
 
-<div class="media-scroller snaps-inline top-buffer">
+<div id="imageCarousel" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        {% for idx in range(0, ldata|length, 2) %}
+        <div class="carousel-item {{ 'active' if idx == 0 else '' }}">
+            <div class="row">
+                {% for j in range(2) %}
+                {% if idx + j < ldata|length %}
+                <div class="col-6">
+                    <div class="media-element text-center">
+                        <img src="{{ url_for('views.serve_images', filename=ldata[idx + j]) }}" alt="" id="Myimg{{ idx + j }}" class="d-block w-100">
+                        <div class="btn-group" role="group" aria-label="buttonGroup">
+                            <button id="show-img" type="button" class="blendbtn btn btn-primary rounded m-3" data-toggle="modal" data-target="#my-modal{{ idx + j }}"><b>View</b></button>
+                            <a class="nav-item nav-link nav-text buttonA" id="shop-link{{ idx + j }}" href="/shopping-results?{{ ldata[idx + j] }}"><b>Shop</b></a>
+                            <button id="favourite{{ idx + j }}" type="button" class="blendbtn btn btn-primary favourite rounded m-3"><b>Favourite</b></button>
+                        </div>
+                    </div>
+                    <div id="my-modal{{ idx + j }}" class="modal fade" aria-labelledby="my-modalLabel" aria-hidden="true" tabindex="-1" role="dialog">
+                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <img src="{{ url_for('views.serve_images', filename=ldata[idx + j]) }}" class="img-responsive" style="width: 100%;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <a class="carousel-control-prev" href="#imageCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#imageCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+<!-- <div class="media-scroller snaps-inline top-buffer">
     {% for idx, link in enumerate(ldata) %}
     <div class="media-element">
         <img src="{{ url_for('views.serve_images', filename=link) }}" alt="" id="Myimg{{ idx }}">
         <div class="btn-group" role="group" aria-label="buttonGroup">
             <button id="show-img" type="button" class="blendbtn btn btn-primary rounded m-3" data-toggle="modal" data-target="#my-modal{{ idx }}"><b>View</b></button>
-            <a class="nav-item nav-link nav-text buttonA" id="shop-link{{ idx }}" href="/shopping-results?{{ link }}"><b>Shop</b></a>
             <button id="favourite{{ idx }}" type="button" class="blendbtn btn btn-primary favourite rounded m-3"><b>Favourite</b></button>
         </div>
     </div>
@@ -57,7 +104,7 @@
         </div>
     </div>
     {% endfor %}
-</div>
+</div> -->
 
 
 <!-- <div class="media-scroller snaps-inline top-buffer">
