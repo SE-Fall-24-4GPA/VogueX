@@ -9,7 +9,7 @@ We are excited to announce the release of Version 2.0 of our software! This upda
 ## Key Features and Improvements
 
 ### New Features
-- **Feature 1:** Improved Model recommendation
+- **Feature 1:** Model recommendation revamped 
 - **Feature 2:** Improved UI along with rating functionality
 - **Feature 3:** New landing page for favourites added
 
