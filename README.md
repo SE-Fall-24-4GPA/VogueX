@@ -6,7 +6,9 @@
 
 [![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://github.com/NC-State-24/VogueX/blob/master/README.md)
 
-<a href=https://github.com/NC-State-24/VogueX/blob/master/LICENSE.md><img src=https://img.shields.io/github/license/NC-State-24/VogueX></a>
+<a href="https://github.com/NC-State-24/VogueX/blob/master/LICENSE.md">
+  <img src="https://img.shields.io/github/license/NC-State-24/VogueX?style=flat-square" alt="License">
+</a>
 
 [![Github Repo size in bytes](https://img.shields.io/github/languages/code-size/NC-State-24/VogueX)](https://github.com/NC-State-24/VogueX)
 
