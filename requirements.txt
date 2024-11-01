@@ -127,3 +127,5 @@ wheel==0.44.0
 windows-curses==2.4.0
 wrapt==1.16.0
 zipp==3.8.1
+black
+

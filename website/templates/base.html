@@ -44,7 +44,8 @@
         <div class="navbar-nav">
             {% if user.is_authenticated %}
                 <a class="nav-item nav-link" id="home" href="/">Home</a>
-                <a class="nav-item nav-link" id="favourites" href="/favourites">Favourites</a>
+                <a class="nav-item nav-link" id="favourites" href="{{ url_for('favourites.favourites', userid=current_user.id) }}">Favourites</a>
+			
                 <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
                 <a class="nav-item nav-link" id="profile" href="/profile">Welcome, {{ current_user.first_name }}</a>
             {% else %}

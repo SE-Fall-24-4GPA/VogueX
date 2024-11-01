@@ -17,6 +17,7 @@ class RecommendationContractRequest:
     CULTURE_KEY = "culture"
     GENDER_KEY = "gender"
 
+
 class NewRecommendationContractRequest:
     # RECOMMENDATION PAYLOAD FIELDS
     GENDER_KEY = "gender"
@@ -30,6 +31,7 @@ class NewRecommendationContractRequest:
 
 class RecommendationContractResponse:
     LINKS = "links"
+
 
 class NewRecommendationContractResponse:
     IMAGES = "images"
