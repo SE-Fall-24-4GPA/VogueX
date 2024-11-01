@@ -22,6 +22,8 @@
 [![github workflow](https://github.com/mukunda-p/vogueX---Fashion-Recommender/actions/workflows/style_checker.yml/badge.svg)](https://github.com/mukunda-p/vogueX---Fashion-Recommender/actions/workflows/style_checker.yml)
 [![github workflow](https://github.com/mukunda-p/vogueX---Fashion-Recommender/actions/workflows/main.yml/badge.svg)](https://github.com/mukunda-p/vogueX---Fashion-Recommender/actions/workflows/main.yml)
 
+[![Black Formatting](https://github.com/NC-State-24/VogueX/actions/workflows/format.yml/badge.svg)](https://github.com/NC-State-24/VogueX/actions/workflows/format.yml)
+
 # Fashion Recommender: A Style for Every Story 🌦👗
 
 Have you ever picked out the perfect outfit for a big day, only to realize the weather had other plans? Or maybe you wished your wardrobe knew just when to swap out those summer florals for cozy winter knits?
