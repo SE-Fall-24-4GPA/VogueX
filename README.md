@@ -4,13 +4,13 @@
 
 [![Build Status](https://circleci.com/gh/NC-State-24/VogueX/tree/dev.svg?style=svg)](https://circleci.com/gh/NC-State-24/VogueX/tree/dev)
 
-[![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://github.com/NC-State-24/VogueX/blob/dev/README.md)
+[![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://github.com/NC-State-24/VogueX/blob/master/README.md)
 
-<a href =https://github.com/NC-State-24/VogueX/blob/dev/LICENCE.md><img src=https://img.shields.io/github/license/NC-State-24/VogueX></a>
+<a href =https://github.com/NC-State-24/VogueX/blob/master/LICENSE.md><img src=https://img.shields.io/github/license/NC-State-24/VogueX></a>
 
-[![Github Repo size in bytes](https://img.shields.io/github/languages/code-size/mukunda-p/vogueX---Fashion-Recommender)](https://github.com/NC-State-24/VogueX)
+[![Github Repo size in bytes](https://img.shields.io/github/languages/code-size/NC-State-24/VogueX)](https://github.com/NC-State-24/VogueX)
 
-[![codecov](https://codecov.io/gh/NC-State-24/VogueX/branch/dev/graph/badge.svg?token=O08MSPU0WT)](https://codecov.io/gh/NC-State-24/VogueX)
+[![codecov](https://codecov.io/gh/NC-State-24/VogueX/branch/master/graph/badge.svg?token=O08MSPU0WT)](https://codecov.io/gh/NC-State-24/VogueX)
 
 [![DOI](https://zenodo.org/badge/568223471.svg)](https://zenodo.org/badge/latestdoi/568223471)
 
