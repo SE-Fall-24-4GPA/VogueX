@@ -1,4 +1,4 @@
-# Contributing to our SE Project-2
+# Contributing to VogueX
 
 Thanks for showing your interest in contributing for our Project 2 repository. When contributing to this repository, there are certain guidelines to be followed. Please discuss the changes you wish to make with the owners of the repository via email, issue or any other mode of communication.
 
