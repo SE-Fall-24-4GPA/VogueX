@@ -1,10 +1,10 @@
-# Contributing to our SE Project-2
+# Contributing to VogueX
 
 Thanks for showing your interest in contributing for our Project 2 repository. When contributing to this repository, there are certain guidelines to be followed. Please discuss the changes you wish to make with the owners of the repository via email, issue or any other mode of communication.
 
 # Code of Conduct 
 
-By participating and contributing to this project, you agree to uphold our [Code of Conduct](CODE_OF_CONDUCT.md). Any unacceptable behaviour can be reported to svangal@ncsu.edu 
+By participating and contributing to this project, you agree to uphold our [Code of Conduct](CODE_OF_CONDUCT.md). Any unacceptable behaviour can be reported to hbharat2@ncsu.edu and rmante@ncsu.edu
 
 Prerequisites to contribute to our project: 
   1. Must be a graduate student at North Carolina State University. 
@@ -54,7 +54,7 @@ Here, <your OS> is the Opearting System of your machine.
 
 
 ### Fork Repository
-To contribute code to our product, push code to your own fork and open Pull Requests in the [GitHub repository](https://github.com/arvindsrinivas1/vogueX---Fashion-Recommender)
+To contribute code to our product, push code to your own fork and open Pull Requests in the [GitHub repository](https://github.com/NC-State-24/VogueX)
 # Styleguides 
 ### Git Commit messages 
   - Describe the need of change

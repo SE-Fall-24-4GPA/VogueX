@@ -11,6 +11,7 @@ from website.models import User
 
 sys.path.append("..")
 
+
 # running
 def test_recommendations(app):
     client = app.test_client()

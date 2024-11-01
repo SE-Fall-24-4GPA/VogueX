@@ -31,12 +31,15 @@ class WeatherConfig:
 #             return jsonResponse["current"]["condition"]["text"]
 #         return ""
 
+
 class WeatherAPI:
     def __init__(self) -> None:
         self.config = WeatherConfig()
+
     """
     Function to fetch current weather forecast using city from external weather API
     """
+
     def getCurrentWeather(self, latitude=None, longitude=None, city=None):
         url = "http://api.weatherapi.com/v1/current.json?key={API_KEY1}&q={city}&aqi=no".format(
             city=city, API_KEY1=self.config.API_KEY
@@ -52,9 +55,11 @@ class WeatherAPI:
         if "condition" in jsonResponse:
             return jsonResponse["condition"]["text"]
         return ""
+
     """
     Function to fetch weather forecast for future from external weather API
     """
+
     def getFutureWeather(self, date=None, city=None, time=None):
         url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/{city}/{Date}?key={API_KEY2}".format(
             city=city, Date=date, API_KEY2=self.config.API_KEY

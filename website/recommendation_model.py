@@ -14,7 +14,15 @@ def get_recommendations(user_input):
     data['image'] = data['id'].astype(str) + ".jpg"
 
     # Specify the features to be encoded
-    features_to_encode = ['gender', 'masterCategory', 'subCategory', 'articleType', 'baseColour', 'season', 'usage']
+    features_to_encode = [
+        "gender",
+        "masterCategory",
+        "subCategory",
+        "articleType",
+        "baseColour",
+        "season",
+        "usage",
+    ]
 
     # Dictionary to store label encoders for each feature
     # label_encoders = {feature: LabelEncoder() for feature in features_to_encode}
@@ -39,12 +47,16 @@ def get_recommendations(user_input):
         def __init__(self, vocab_sizes, embedding_dim=8):
             super(FeatureExtractor, self).__init__()
             self.embeddings = {
-                feature: tf.keras.layers.Embedding(input_dim=size, output_dim=embedding_dim)
+                feature: tf.keras.layers.Embedding(
+                    input_dim=size, output_dim=embedding_dim
+                )
                 for feature, size in vocab_sizes.items()
             }
 
         def call(self, inputs):
-            embedded_features = [self.embeddings[feature](inputs[feature]) for feature in inputs]
+            embedded_features = [
+                self.embeddings[feature](inputs[feature]) for feature in inputs
+            ]
             concatenated = tf.concat(embedded_features, axis=-1)
             return concatenated
 
@@ -54,6 +66,7 @@ def get_recommendations(user_input):
     for feature in features_to_encode:
         encoder = label_encoders[feature]
         # encoded_dataset[feature] = encoder.transform(data[feature].fillna("Other"))
+
         vocab_sizes[feature] = len(encoder.classes_)
 
     # Initialize model and process dataset
@@ -74,7 +87,10 @@ def get_recommendations(user_input):
 
     encoded_user_input = {feature: label_encoders[feature].transform([value])[0] for feature, value in user_input.items()}
 
-    user_input_tensors = {feature: tf.constant([value]) for feature, value in encoded_user_input.items()}
+
+    user_input_tensors = {
+        feature: tf.constant([value]) for feature, value in encoded_user_input.items()
+    }
 
     user_features = feature_extractor(user_input_tensors).numpy()
 
@@ -84,8 +100,9 @@ def get_recommendations(user_input):
 
     # Retrieve top 10 similar items
     similar_items = data.iloc[top_10_indices]
-    
-    return similar_items['image']
+
+    return similar_items["image"]
+
 
 # # Run the function to test the model
 # similar_items = get_recommendations()

@@ -7,24 +7,38 @@ from sklearn.preprocessing import LabelEncoder
 import numpy as np
 
 # Load dataset
-data = pd.read_csv("datasets/fashion-dataset/styles.csv", on_bad_lines='skip')
-data['image'] = data['id'].astype(str) + ".jpg"
+data = pd.read_csv("datasets/fashion-dataset/styles.csv", on_bad_lines="skip")
+data["image"] = data["id"].astype(str) + ".jpg"
 
 # Specify the features to be encoded
-features_to_encode = ['gender', 'masterCategory', 'subCategory', 'articleType', 'baseColour', 'season', 'usage']
+features_to_encode = [
+    "gender",
+    "masterCategory",
+    "subCategory",
+    "articleType",
+    "baseColour",
+    "season",
+    "usage",
+]
 
 # Dictionary to store label encoders for each feature
 # label_encoders = {feature: LabelEncoder() for feature in features_to_encode}
-model_save_dir = 'datasets/model_params/'
-label_encoders = {col: joblib.load(os.path.join(model_save_dir, f'{col}_label_encoder.pkl')) for col in features_to_encode}
+model_save_dir = "datasets/model_params/"
+label_encoders = {
+    col: joblib.load(os.path.join(model_save_dir, f"{col}_label_encoder.pkl"))
+    for col in features_to_encode
+}
 
 # Apply label encoding to each specified feature
 for feature in features_to_encode:
     # Fit the LabelEncoder on the column and transform the data
-    data[feature] = label_encoders[feature].fit_transform(data[feature].fillna("Unknown"))
+    data[feature] = label_encoders[feature].fit_transform(
+        data[feature].fillna("Unknown")
+    )
 
 # Convert the encoded DataFrame into a dictionary of integer arrays for each feature
 encoded_dataset = {feature: data[feature].values for feature in features_to_encode}
+
 
 class FeatureExtractor(tf.keras.Model):
     def __init__(self, vocab_sizes, embedding_dim=8):
@@ -35,9 +49,12 @@ class FeatureExtractor(tf.keras.Model):
         }
 
     def call(self, inputs):
-        embedded_features = [self.embeddings[feature](inputs[feature]) for feature in inputs]
+        embedded_features = [
+            self.embeddings[feature](inputs[feature]) for feature in inputs
+        ]
         concatenated = tf.concat(embedded_features, axis=-1)
         return concatenated
+
 
 # Vocabulary sizes for each feature
 vocab_sizes = {}
@@ -54,10 +71,17 @@ encoded_features = feature_extractor(encoded_dataset).numpy()
 
 # Custom input example
 custom_input = {  # Encode custom input in the same way as dataset features
-    'gender': 1, 'masterCategory': 2, 'subCategory': 0, 'articleType': 4,
-    'baseColour': 3, 'season': 2, 'usage': 1
+    "gender": 1,
+    "masterCategory": 2,
+    "subCategory": 0,
+    "articleType": 4,
+    "baseColour": 3,
+    "season": 2,
+    "usage": 1,
 }
-custom_input_tensors = {feature: tf.constant([value]) for feature, value in custom_input.items()}
+custom_input_tensors = {
+    feature: tf.constant([value]) for feature, value in custom_input.items()
+}
 
 custom_features = feature_extractor(custom_input_tensors).numpy()
 

@@ -94,8 +94,7 @@ def get_preferences():
         )
     # query the preferences table and check if preferences have been saved or not
     userid = session[contracts.SessionParameters.USERID]
-    preferencesObj = models.Preference.query.filter_by(
-        userid=int(userid)).first()
+    preferencesObj = models.Preference.query.filter_by(userid=int(userid)).first()
     if not preferencesObj:
         return (
             jsonify(
@@ -144,8 +143,7 @@ def post_preferences():
     if contracts.PreferenceContractRequest.PREFERENCES in req:
         user_preferences = req[contracts.PreferenceContractRequest.PREFERENCES]
 
-    preferenceObject = models.Preference.query.filter_by(
-        userid=int(userid)).first()
+    preferenceObject = models.Preference.query.filter_by(userid=int(userid)).first()
     if not preferenceObject:
         preferenceObject = models.Preference(
             userid=int(userid), preferences=json.dumps(user_preferences)
