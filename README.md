@@ -115,6 +115,9 @@ http://localhost:5000/
 
 > This project was completed as part of **Project 2 for the CSC510 Software Engineering** class in the NC State Graduate Program for Computer Science and was built upon the original repository by [mukunda-p/vogueX---Fashion-Recommender](https://github.com/mukunda-p/vogueX---Fashion-Recommender.git).
 
+## More Details - Documentation
+Please visit the below link for more details on our project and various use cases detailing all the release cycles.
+https://voguex-docs.surge.sh/
 
 
 ## License
