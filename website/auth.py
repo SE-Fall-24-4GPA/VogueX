@@ -23,10 +23,10 @@ def login():
                 login_user(user, remember=True)
                 return render_template("home.html", user=user)
             else:
-                flash("Incorrect password, try again.", category="error")
+                flash("ERRORIncorrect password, try again.", category="error")
         else:
-            flash("Email does not exist.", category="error")
-
+            flash("ERROR Email does not exist.", category="error")
+    
     return render_template("login.html", user=current_user)
 
 
@@ -56,17 +56,17 @@ def sign_up():
 
         user = User.query.filter_by(email=email).first()
         if user:
-            flash("Email already exists.", category="error")
+            flash("ERROR Email already exists.", category="error")
         elif len(email) < 4:
-            flash("Email must be greater than 3 characters.", category="error")
+            flash("ERROR Email must be greater than 3 characters.", category="error")
         elif len(first_name) < 2:
-            flash("First name must be greater than 1 character.", category="error")
+            flash("ERROR First name must be greater than 1 character.", category="error")
         elif password1 != password2:
-            flash("Passwords don't match.", category="error")
+            flash("ERROR Passwords don't match.", category="error")
         elif len(password1) < 7:
-            flash("Password must be at least 7 characters.", category="error")
+            flash("ERROR Password must be at least 7 characters.", category="error")
         elif int(age) < 18 or int(age) > 90:
-            flash("Please enter a valid age", category="error")
+            flash("ERROR Please enter a valid age", category="error")
         else:
             new_user = User(
                 email=email,
@@ -76,7 +76,7 @@ def sign_up():
                 city=city,
                 age=age,
                 phone_number=phone_number,
-                password=generate_password_hash(password1, method="sha256"),
+                password=generate_password_hash(password1),
             )
             db.session.add(new_user)
             db.session.commit()
@@ -101,7 +101,7 @@ def profile_update():
         user = User.query.filter_by(id=int(userid)).first()
 
         if int(age) < 18 or int(age) > 90:
-            flash("Please enter a valid age", category="error")
+            flash("ERROR Please enter a valid age", category="error")
         else:
             user.age = age
             user.city = city

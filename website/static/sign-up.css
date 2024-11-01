@@ -1,0 +1,116 @@
+<style>
+    body {
+        background-color: #f8f9fa;
+        font-family: Arial, sans-serif;
+    }
+    .container {
+        max-width: 600px; /* Increased width */
+        margin: auto;
+        padding: 20px; /* Add padding around the container */
+        background-color: #ffffff; /* White background for form */
+        border-radius: 8px; /* Rounded corners */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    }
+    .form-row {
+        display: flex; /* Flex for aligning items */
+        justify-content: space-between; /* Space between items */
+        margin-bottom: 10px; /* Reduce space between fields */
+    }
+    .form-group {
+        flex: 1; /* Flex for equal width */
+        margin-right: 10px; /* Space between form groups */
+    }
+    .form-group:last-child {
+        margin-right: 0; /* No margin on the last item */
+    }
+    .form-group label {
+        display: block; /* Make label take full width */
+        margin-bottom: 5px; /* Space between label and input */
+    }
+    .form-control {
+        width: 100%; /* Full width for input fields */
+        padding: 10px; /* Padding for better touch target */
+        border: 1px solid #ccc; /* Light border */
+        border-radius: 4px; /* Rounded borders for inputs */
+        transition: border-color 0.2s; /* Smooth transition */
+    }
+    .form-control:focus {
+        border-color: #007bff; /* Change border color on focus */
+        outline: none; /* Remove default outline */
+    }
+    .form-small {
+        font-size: 0.85rem; /* Smaller font size */
+    }
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+        color: white;
+        width: 100%; /* Full width button */
+        padding: 10px; /* Add padding */
+        border-radius: 4px; /* Rounded corners */
+        transition: background-color 0.2s; /* Smooth transition */
+    }
+    .btn-primary:hover {
+        background-color: #0056b3; /* Darker shade on hover */
+    }
+    .error-message {
+        color: red; /* Red color for error messages */
+        font-size: 0.9rem; /* Slightly larger font for visibility */
+        margin-top: 5px; /* Space above the error message */
+    }
+    @media (max-width: 600px) {
+        .form-row {
+            flex-direction: column; /* Stack fields on small screens */
+        }
+        .form-group {
+            margin-right: 0; /* Remove right margin in column layout */
+            margin-bottom: 10px; /* Space between stacked fields */
+        }
+    }
+	.form-group.gender {
+        flex: 0.7; /* Reduce width for the gender dropdown */
+    }
+	.form-group.age {
+        flex: 0.4; /* Reduce width for the gender dropdown */
+    }
+	   body {
+        background-color: #f8f9fa;
+        font-family: Arial, sans-serif;
+    }
+    .container {
+        max-width: 600px; /* Increased width */
+        margin: auto;
+    }
+    .form-row {
+        display: flex; /* Flex for aligning items */
+        justify-content: space-between; /* Space between items */
+        margin-bottom: 10px; /* Reduce space between fields */
+    }
+    .form-group {
+        flex: 1; /* Flex for equal width */
+        margin-right: 10px; /* Space between form groups */
+    }
+    .form-group:last-child {
+        margin-right: 0; /* No margin on the last item */
+    }
+    .form-group label {
+        display: block; /* Make label take full width */
+        margin-bottom: 5px; /* Space between label and input */
+    }
+    .form-control {
+        width: 100%; /* Full width for input fields */
+    }
+    .form-small {
+        font-size: 0.85rem; /* Smaller font size */
+    }
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+        color: white;
+        width: 100%; /* Full width button */
+    }
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+</style>

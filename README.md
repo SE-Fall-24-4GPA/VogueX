@@ -96,6 +96,13 @@ x
   `cd VogueX`
 
 
+For integration of mysql:
+
+  update __init__.py with credentials for mysql
+
+  and run the SQL schema
+
+
 We have made a python script to run the application.
 Just run 
 

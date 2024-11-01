@@ -1,28 +1,36 @@
-{% extends "base.html" %} {% block title %}Login{% endblock %} {% block content
-%}
-<form method="POST">
-  <h3 align="center">Login</h3>
-  <div class="form-group">
-    <label for="email">Email Address</label>
-    <input
-      type="email"
-      class="form-control"
-      id="email"
-      name="email"
-      placeholder="Enter email"
-    />
-  </div>
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input
-      type="password"
-      class="form-control"
-      id="password"
-      name="password"
-      placeholder="Enter password"
-    />
-  </div>
-  <br />
-  <button type="submit" class="btn btn-primary">Login</button>
-</form>
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block navbar %}
+<!-- Intentionally left empty to exclude the navbar -->
+{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h3 class="text-center mb-4">Login</h3>
+    <form method="POST" class="border rounded p-4 shadow-sm" style="max-width: 400px; margin: auto;">
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                placeholder="Enter email"
+                required
+            />
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                placeholder="Enter password"
+                required
+            />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Login</button>
+    </form>
+    <p class="text-center mt-3">Don't have an account? <a href="/sign-up">Sign Up</a></p>
+</div>
 {% endblock %}
