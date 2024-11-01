@@ -54,7 +54,7 @@ Here, <your OS> is the Opearting System of your machine.
 
 
 ### Fork Repository
-To contribute code to our product, push code to your own fork and open Pull Requests in the [GitHub repository](https://github.com/arvindsrinivas1/vogueX---Fashion-Recommender)
+To contribute code to our product, push code to your own fork and open Pull Requests in the [GitHub repository](https://github.com/NC-State-24/VogueX)
 # Styleguides 
 ### Git Commit messages 
   - Describe the need of change

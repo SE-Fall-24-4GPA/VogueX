@@ -92,7 +92,7 @@ First, clone the repository:
 
 
 Change working directory to the repository:
-
+x
   `cd VogueX`
 
 
