@@ -6,7 +6,9 @@
 
 [![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://github.com/NC-State-24/VogueX/blob/master/README.md)
 
-<a href =https://github.com/NC-State-24/VogueX/blob/master/LICENSE.md><img src=https://img.shields.io/github/license/NC-State-24/VogueX></a>
+<a href="https://github.com/NC-State-24/VogueX/blob/master/LICENSE.md">
+  <img src="https://img.shields.io/github/license/NC-State-24/VogueX?style=flat-square" alt="License">
+</a>
 
 [![Github Repo size in bytes](https://img.shields.io/github/languages/code-size/NC-State-24/VogueX)](https://github.com/NC-State-24/VogueX)
 
@@ -16,7 +18,7 @@
 
 
 [![GitHub issues](https://img.shields.io/github/issues/NC-State-24/VogueX)](https://github.com/NC-State-24/VogueX/issues?q=is%3Aopen)
-[![GitHub closed issues](https://img.shields.io/github/issues-closed/NC-State-24/VogueX)](https://github.com/mukunda-p/vogueX---Fashion-Recommender/issues?q=is%3Aissue+is%3Aclosed)
+[![GitHub closed issues](https://img.shields.io/github/issues-closed/NC-State-24/VogueX)](https://github.com/NC-State-24/VogueX/issues?q=is%3Aissue+is%3Aclosed)
 [![Github pull requests](https://img.shields.io/github/issues-pr/NC-State-24/VogueX)](https://github.com/NC-State-24/VogueX/pulls)
 [![Github closed pull requests](https://img.shields.io/github/issues-pr-closed/NC-State-24/VogueX)](https://github.com/NC-State-24/VogueX/pulls?q=is%3Apr+is%3Aclosed)
 
