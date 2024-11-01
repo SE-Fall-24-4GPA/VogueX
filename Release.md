@@ -43,7 +43,7 @@ In the coming months, we will continue to develop new features and enhancements 
 
 ## Feedback and Support
 We welcome your feedback! Please reach out to us via:
-- Email: hbharathi4@ncsu.edu, rmante@ncsu.edu, gramesh2@ncsu.edu
+- Email: hbharat2@ncsu.edu, rmante@ncsu.edu, gramesh4@ncsu.edu
 - Community Forum: [[Link to Forum]](https://github.com/NC-State-24/VogueX/discussions/15)
 - GitHub Issues: [[Link to GitHub Repository]](https://github.com/NC-State-24/VogueX)
 
