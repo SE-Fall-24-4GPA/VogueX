@@ -1,26 +1,27 @@
 
 ## vogueX Fashion Recommender: Outfit Recommendation System
 
-[![Build Status](https://circleci.com/gh/mukunda-p/vogueX---Fashion-Recommender/tree/dev.svg?style=svg)](https://circleci.com/gh/mukunda-p/vogueX---Fashion-Recommender/tree/dev)
 
-[![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://github.com/mukunda-p/vogueX---Fashion-Recommender/blob/dev/README.md)
+[![Build Status](https://circleci.com/gh/NC-State-24/VogueX/tree/dev.svg?style=svg)](https://circleci.com/gh/NC-State-24/VogueX/tree/dev)
 
-<a href =https://github.com/mukunda-p/vogueX---Fashion-Recommender/blob/dev/LICENCE.md><img src=https://img.shields.io/github/license/mukunda-p/vogueX---Fashion-Recommender></a>
+[![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://github.com/NC-State-24/VogueX/blob/dev/README.md)
 
-[![Github Repo size in bytes](https://img.shields.io/github/languages/code-size/mukunda-p/vogueX---Fashion-Recommender)](https://github.com/mukunda-p/vogueX---Fashion-Recommender)
+<a href =https://github.com/mukunda-p/vogueX---Fashion-Recommender/blob/dev/LICENCE.md><img src=https://img.shields.io/github/license/NC-State-24/VogueX></a>
 
-[![codecov](https://codecov.io/gh/mukunda-p/vogueX---Fashion-Recommender/branch/dev/graph/badge.svg?token=O08MSPU0WT)](https://codecov.io/gh/mukunda-p/vogueX---Fashion-Recommender)
+[![Github Repo size in bytes](https://img.shields.io/github/languages/code-size/mukunda-p/vogueX---Fashion-Recommender)](https://github.com/NC-State-24/VogueX)
+
+[![codecov](https://codecov.io/gh/NC-State-24/VogueX/branch/dev/graph/badge.svg?token=O08MSPU0WT)](https://codecov.io/gh/NC-State-24/VogueX)
 
 [![DOI](https://zenodo.org/badge/568223471.svg)](https://zenodo.org/badge/latestdoi/568223471)
 
 
-[![GitHub issues](https://img.shields.io/github/issues/mukunda-p/vogueX---Fashion-Recommender)](https://github.com/mukunda-p/vogueX---Fashion-Recommender/issues?q=is%3Aopen)
-[![GitHub closed issues](https://img.shields.io/github/issues-closed/mukunda-p/vogueX---Fashion-Recommender)](https://github.com/mukunda-p/vogueX---Fashion-Recommender/issues?q=is%3Aissue+is%3Aclosed)
-[![Github pull requests](https://img.shields.io/github/issues-pr/mukunda-p/vogueX---Fashion-Recommender)](https://github.com/mukunda-p/vogueX---Fashion-Recommender/pulls)
-[![Github closed pull requests](https://img.shields.io/github/issues-pr-closed/mukunda-p/vogueX---Fashion-Recommender)](https://github.com/mukunda-p/vogueX---Fashion-Recommender/pulls?q=is%3Apr+is%3Aclosed)
+[![GitHub issues](https://img.shields.io/github/issues/NC-State-24/VogueX)](https://github.com/NC-State-24/VogueX/issues?q=is%3Aopen)
+[![GitHub closed issues](https://img.shields.io/github/issues-closed/NC-State-24/VogueX)](https://github.com/mukunda-p/vogueX---Fashion-Recommender/issues?q=is%3Aissue+is%3Aclosed)
+[![Github pull requests](https://img.shields.io/github/issues-pr/NC-State-24/VogueX)](https://github.com/NC-State-24/VogueX/pulls)
+[![Github closed pull requests](https://img.shields.io/github/issues-pr-closed/NC-State-24/VogueX)](https://github.com/NC-State-24/VogueX/pulls?q=is%3Apr+is%3Aclosed)
 
-[![github workflow](https://github.com/mukunda-p/vogueX---Fashion-Recommender/actions/workflows/style_checker.yml/badge.svg)](https://github.com/mukunda-p/vogueX---Fashion-Recommender/actions/workflows/style_checker.yml)
-[![github workflow](https://github.com/mukunda-p/vogueX---Fashion-Recommender/actions/workflows/main.yml/badge.svg)](https://github.com/mukunda-p/vogueX---Fashion-Recommender/actions/workflows/main.yml)
+[![github workflow](https://github.com/NC-State-24/VogueX/actions/workflows/style_checker.yml/badge.svg)](https://github.com/NC-State-24/VogueX/actions/workflows/style_checker.yml)
+[![github workflow](https://github.com/NC-State-24/VogueX/actions/workflows/main.yml/badge.svg)](https://github.com/NC-State-24/VogueX/actions/workflows/main.yml)
 
 [![Black Formatting](https://github.com/NC-State-24/VogueX/actions/workflows/format.yml/badge.svg)](https://github.com/NC-State-24/VogueX/actions/workflows/format.yml)
 
