@@ -5,9 +5,12 @@ from sklearn.metrics.pairwise import cosine_similarity
 import pandas as pd
 import numpy as np
 
+np.random.seed(42)
+tf.random.set_seed(42)
+
 def get_recommendations(user_input):
     # Load dataset
-    data = pd.read_csv("datasets/fashion-dataset/styles.csv", on_bad_lines='skip')
+    data = pd.read_csv("website/datasets/fashion-dataset/agg_styles.csv", on_bad_lines='skip')
     data['image'] = data['id'].astype(str) + ".jpg"
 
     # Specify the features to be encoded
@@ -15,13 +18,19 @@ def get_recommendations(user_input):
 
     # Dictionary to store label encoders for each feature
     # label_encoders = {feature: LabelEncoder() for feature in features_to_encode}
-    model_save_dir = 'datasets/model_params/'
-    label_encoders = {col: joblib.load(os.path.join(model_save_dir, f'{col}_label_encoder.pkl')) for col in features_to_encode}
+    model_save_dir = 'website/datasets/new_model_params/'
+    label_encoders = {col: joblib.load(os.path.join(model_save_dir, f'{col}_agg_label_encoder.pkl')) for col in features_to_encode}
+
+    for feature, encoder in label_encoders.items():
+        print(f"Labels and corresponding classes for feature '{feature}':")
+        for i, label in enumerate(encoder.classes_):
+            print(f"Class {i}: {label}")
+        print() 
 
     # Apply label encoding to each specified feature
     for feature in features_to_encode:
-        # Fit the LabelEncoder on the column and transform the data
-        data[feature] = label_encoders[feature].fit_transform(data[feature].fillna("Unknown"))
+        # transform the data
+        data[feature] = label_encoders[feature].transform(data[feature].fillna("Other"))
 
     # Convert the encoded DataFrame into a dictionary of integer arrays for each feature
     encoded_dataset = {feature: data[feature].values for feature in features_to_encode}
@@ -44,7 +53,7 @@ def get_recommendations(user_input):
 
     for feature in features_to_encode:
         encoder = label_encoders[feature]
-        encoded_dataset[feature] = encoder.fit_transform(data[feature].fillna("Unknown"))
+        # encoded_dataset[feature] = encoder.transform(data[feature].fillna("Other"))
         vocab_sizes[feature] = len(encoder.classes_)
 
     # Initialize model and process dataset
@@ -63,7 +72,7 @@ def get_recommendations(user_input):
     #     'usage': 'Casual'
     # }
 
-    encoded_user_input = {feature: label_encoders[feature].fit_transform([value])[0] for feature, value in user_input.items()}
+    encoded_user_input = {feature: label_encoders[feature].transform([value])[0] for feature, value in user_input.items()}
 
     user_input_tensors = {feature: tf.constant([value]) for feature, value in encoded_user_input.items()}
 
