@@ -4,7 +4,7 @@ Thanks for showing your interest in contributing for our Project 2 repository. W
 
 # Code of Conduct 
 
-By participating and contributing to this project, you agree to uphold our [Code of Conduct](CODE_OF_CONDUCT.md). Any unacceptable behaviour can be reported to svangal@ncsu.edu 
+By participating and contributing to this project, you agree to uphold our [Code of Conduct](CODE_OF_CONDUCT.md). Any unacceptable behaviour can be reported to hbharat2@ncsu.edu and rmante@ncsu.edu
 
 Prerequisites to contribute to our project: 
   1. Must be a graduate student at North Carolina State University. 
