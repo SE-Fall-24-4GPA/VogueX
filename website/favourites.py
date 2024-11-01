@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, jsonify, session
+from flask import Blueprint, render_template, request, jsonify, session,flash,redirect,url_for
 
 from flask_login import current_user
 from . import db
@@ -16,11 +16,21 @@ payload = {
     "favouriteUrl" : <favouriteUrl>
 }
 """
-
-
-@favouritesbp.route("/favourites/<int:userid>", methods=["POST", "GET"])
+@favouritesbp.route("/favourites/", methods=["GET"])
 def favourites(userid=None):
     if request.method == "GET":
+        userid = session[contracts.SessionParameters.USERID]
+        if contracts.SessionParameters.USERID not in session:
+            return (
+                jsonify(
+                    {
+                        "error": "user not logged in",
+                        "error_code": contracts.ErrorCodes.USER_NOT_LOGGED_IN,
+                    }
+                ),
+                403,
+            )
+
         favourite_query = Favourite.query.filter_by(userid=int(userid))
 
         favourite_resp = favourite_query.all()
@@ -45,6 +55,10 @@ def favourites(userid=None):
             enumerate=enumerate,
         )
 
+
+
+@favouritesbp.route("/favourites/", methods=["POST"])
+def favourites_post(userid=None):
     req_json_body = request.json
 
     favourite_url = ""
@@ -132,7 +146,7 @@ def favourites(userid=None):
             enumerate=enumerate,
         )
 
-    else:
+        """ else:
         favourite_query = Favourite.query.filter_by(userid=int(userid))
         # print(favourite_list)
         if favourite_url != "":
@@ -141,11 +155,34 @@ def favourites(userid=None):
         #     favourite_query = favourite_query.filter_by(search_occasion=search_occasion)
         # if search_weather != "":
         #     favourite_query = favourite_query.filter_by(search_weather=search_weather)
-
         favourite_resp = favourite_query.all()
         for row in favourite_resp:
             db.session.delete(row)
         db.session.commit()
+        flash("Favourite deleted", category='success')
+        #return redirect(url_for('favourites.favourites', userid=current_user.id))
+        
         response = dict()
         response["Message"] = "Delete Success"
-        return jsonify(response), 200
+        return jsonify(response), 200       """
+
+@favouritesbp.route('/favourites/', methods=['DELETE'])
+def delete_favourite():
+    data = request.json
+    userid = session.get(contracts.SessionParameters.USERID)
+    if not userid:
+        return jsonify({'error': 'User not logged in'}), 403
+        
+    favourite_query = Favourite.query.filter_by(userid=int(userid)) 
+
+    favourite_url = data.get('favourite_url')
+    if favourite_url:
+        favourite_query = favourite_query.filter_by(favourite_url=favourite_url)
+        favourite_resp = favourite_query.all()
+        for row in favourite_resp:
+            db.session.delete(row)
+        db.session.commit()
+        return jsonify({'message': 'Favourite deleted successfully'}), 200
+    else:
+        return jsonify({'error': 'Favourite not found'}), 404
+    return jsonify({'error': 'Favourite URL not provided'}), 400

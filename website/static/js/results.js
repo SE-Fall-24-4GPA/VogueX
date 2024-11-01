@@ -1,6 +1,7 @@
 var formattedFormData2={};
 var occasionValLS;
 var cityValLS;
+var user;
 $(document).ready(function(){
 	$('#Myimg').click(function(){
   		$('#Mymodal').modal('show')
@@ -13,7 +14,7 @@ $(document).ready(function(){
 		}
 		
 		let buttonId=this.id;
-
+		
 		if(buttonId.slice(0,9)=="favourite"){
 
 		sid=document.getElementById("fav_msg").innerHTML="Favourite Added Successfully!"
@@ -35,11 +36,11 @@ $(document).ready(function(){
 		$.ajax({
 			type:"POST",
             url:"/favourites",
-            data:formData,
-            success:function(){
-				return "success"
-                
-            },
+			data: formData,
+                success: function(response){
+                    var redirectUrl = window.location.protocol + "//" + window.location.host + "/favourites";
+                    location.href = redirectUrl;
+                },
 			dataType: "json",
             contentType : "application/json"
 		})
