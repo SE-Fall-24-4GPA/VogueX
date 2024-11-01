@@ -14,11 +14,13 @@ def create_app(test_conifg=None):
 
     app.config[
         "SQLALCHEMY_DATABASE_URI"
-    ] = "mysql+pymysql://root:Gprv#2468@localhost:3306/fashion"
+    ] = "mysql+pymysql://admin:0311@localhost:3306/fashion"
 
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     if test_conifg:
         app.config["SECRET_KEY"] = test_conifg["SECRET_KEY"]
         app.config["SQLALCHEMY_DATABASE_URI"] = test_conifg["SQLALCHEMY_DATABASE_URI"]
+        
 
     db.init_app(app)
     
