@@ -16,7 +16,7 @@
 
 
 [![GitHub issues](https://img.shields.io/github/issues/NC-State-24/VogueX)](https://github.com/NC-State-24/VogueX/issues?q=is%3Aopen)
-[![GitHub closed issues](https://img.shields.io/github/issues-closed/NC-State-24/VogueX)](https://github.com/mukunda-p/vogueX---Fashion-Recommender/issues?q=is%3Aissue+is%3Aclosed)
+[![GitHub closed issues](https://img.shields.io/github/issues-closed/NC-State-24/VogueX)](https://github.com/NC-State-24/VogueX/issues?q=is%3Aissue+is%3Aclosed)
 [![Github pull requests](https://img.shields.io/github/issues-pr/NC-State-24/VogueX)](https://github.com/NC-State-24/VogueX/pulls)
 [![Github closed pull requests](https://img.shields.io/github/issues-pr-closed/NC-State-24/VogueX)](https://github.com/NC-State-24/VogueX/pulls?q=is%3Apr+is%3Aclosed)
 
