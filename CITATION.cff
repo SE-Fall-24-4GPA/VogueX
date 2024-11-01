@@ -1,18 +1,15 @@
-cff-version: 1.2.0
+cff-version: 2.2.0
 message: "If you use this software, please cite it as below."
 authors:
-- family-names: "Karnati"
-  given-names: "Kalyan"
-- family-names: "Pericherla"
-  given-names: "Mukunda Varma"
-- family-names: "Sanganabhatla"
-  given-names: "Pranavi Sharma"
-- family-names: "Vangala"
-  given-names: "Saketh"
-- family-names: "Kaalam"
-  given-names: "Srihitha Reddy"  
-title: "vogueX---Fashion-Recommender"
+- family-names: "Bharathi"
+  given-names: "Haricharan"
+- family-names: "Ramesh"
+  given-names: "Gokul"
+- family-names: "Mante"
+  given-names: "Raghunandan"
+
+title: "VogueX"
 version: 3.0.0
-doi: 10.5281/zenodo.5746400
-date-released: 2022-12-05
-url: "https://github.com/mukunda-p/vogueX---Fashion-Recommender"
+doi: 10.5281/zenodo.14027037
+date-released: 2024-11-01
+url: "https://github.com/NC-State-24/VogueX"
