@@ -53,6 +53,14 @@ Contributions are welcome, and please see CONTRIBUTING.md for details. -->
                         <div class="review-display" style="display: none; margin-top: 10px;">
                             <p class="submitted-review" style="color: white; background-color: rgba(0, 0, 0, 0.5);"></p>
                         </div>
+                        
+                             {% if sorted_fav_list[occasion][idx2]['review'] %}
+                             {% if sorted_fav_list[occasion][idx2]['review'] %}
+                             <p style="color: white; background-color: rgba(0, 0, 0, 0.5);">{{ sorted_fav_list[occasion][idx2]['review'] }}</p>
+                         {% else %}
+                             <p style="color: white; background-color: rgba(0, 0, 0, 0.5);">No review available.</p>
+                         {% endif %}
+                {% endif %}
                     </div>                    
                 </div>
             {% endfor %}
@@ -106,28 +114,9 @@ Contributions are welcome, and please see CONTRIBUTING.md for details. -->
         });
     });
 </script>
-	<!-- <div class="container flow">
-    {% if sorted_fav_list %}
-        {% for idx, occasion in enumerate(sorted_fav_list) %}
-            <!-- <h3>{{ occasion }}</h3> -->
-            <div class="media-scroller snaps-inline top-buffer">
-                {% for idx2, j in enumerate(sorted_fav_list[occasion]) %} 
-                    <div class="media-element">
-                        <img src="{{sorted_fav_list[occasion][idx2]['favourite_url']}}" class="favourite-image" data-favourite-url="{{sorted_fav_list[occasion][idx2]['favourite_url']}}">
-                        <button type="button" class="blendbtn btn btn-danger delete-favourite rounded m-3" aria-label="Remove Favourite" id="{{occasion}}{{idx2}}"><b>Remove Favourite</b></button>
-                    </div>
-                {% endfor %}   
-            </div>  
-        {% endfor %}
-    {% else %}
 
-	<div style="position: relative; display: inline-block;">
-    <img src="/static/images/dog.jpg" alt="Description" style="width: 100%; height: auto;">
-    <h2 style="position: absolute; top: 20%; left: 60%; color: white; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); font-size: 2vw;">
-        Oopsie-daisy! 🐾 No favorites in sight! Time to sprinkle in some fabulous ones!
-    </h2> -->
 </div>
-
+{% endblock %}
 <style>
 .media-scroller {
     display: flex;
@@ -155,6 +144,3 @@ Contributions are welcome, and please see CONTRIBUTING.md for details. -->
 
 
 		
-	{% endif %}
-</div>
-{% endblock %}
