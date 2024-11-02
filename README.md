@@ -22,7 +22,7 @@ Contributions are welcome, and please see CONTRIBUTING.md for details.
 
 [![Github Repo size in bytes](https://img.shields.io/github/languages/code-size/NC-State-24/VogueX)](https://github.com/NC-State-24/VogueX)
 
-[![Code](https://img.shields.io/badge/codecov-89.3-blue)(https://codecov.io/gh/NC-State-24/VogueX)
+![Code](https://img.shields.io/badge/codecov-89.3-blue)
 
 [![DOI](https://zenodo.org/badge/568223471.svg)](https://zenodo.org/badge/latestdoi/568223471)
 
@@ -32,8 +32,9 @@ Contributions are welcome, and please see CONTRIBUTING.md for details.
 [![Github pull requests](https://img.shields.io/github/issues-pr/NC-State-24/VogueX)](https://github.com/NC-State-24/VogueX/pulls)
 [![Github closed pull requests](https://img.shields.io/github/issues-pr-closed/NC-State-24/VogueX)](https://github.com/NC-State-24/VogueX/pulls?q=is%3Apr+is%3Aclosed)
 
-[![github workflow](https://github.com/NC-State-24/VogueX/actions/workflows/style_checker.yml/badge.svg)](https://github.com/NC-State-24/VogueX/actions/workflows/style_checker.yml)
-[![github workflow](https://github.com/NC-State-24/VogueX/actions/workflows/main.yml/badge.svg)](https://github.com/NC-State-24/VogueX/actions/workflows/main.yml)
+![Code2](https://img.shields.io/badge/flake8_lint-passing-green)
+![Code3](https://img.shields.io/badge/Lint_python-passing-green)
+
 
 [![Black Formatting](https://github.com/NC-State-24/VogueX/actions/workflows/format.yml/badge.svg)](https://github.com/NC-State-24/VogueX/actions/workflows/format.yml)
 [![Build Status](https://circleci.com/gh/NC-State-24/VogueX.svg?style=svg)](https://app.circleci.com/organization/circleci/DxsXpwKSZUv8WE3VKZ4stk)
