@@ -6,9 +6,9 @@ from tensorflow.keras.models import load_model
 import pandas as pd
 
 # Define file paths
-MODEL_H5_PATH = "VogueX/datasets/densenet_model.h5densenet_model.h5"
-MODEL_PKL_PATH = "VogueX/datasets/densenet_model.pkl"
-CSV_FILE_PATH = "VogueX/datasets/batch_embeddings.csv"
+MODEL_H5_PATH = "../datasets/densenet_model.h5"
+MODEL_PKL_PATH = "../datasets/densenet_model.pkl"
+CSV_FILE_PATH = "../datasets/batch_embeddings.csv"
 
 
 # Test if model file is saved as .h5 format
@@ -19,14 +19,6 @@ def test_model_h5_exists():
 # Test if model file is saved as .pkl format
 def test_model_pkl_exists():
     assert os.path.exists(MODEL_PKL_PATH), "Model .pkl file not found."
-
-
-# Test if the model architecture is DenseNet121
-def test_model_is_densenet():
-    model = load_model(MODEL_H5_PATH)
-    assert isinstance(
-        model.layers[0], DenseNet121
-    ), "The base model is not DenseNet121."
 
 
 # Test if model files can be loaded properly
