@@ -40,12 +40,12 @@ def favourites(userid=None):
         for row in favourite_resp:
             fav = json.loads(json.dumps(Favourite.serialize(row)))
 
-            if fav["search_occasion"] in sorted_fav_list.keys():
-                curr_list = list(sorted_fav_list[fav["search_occasion"]])
+            if fav["ratings"] in sorted_fav_list.keys():
+                curr_list = list(sorted_fav_list[fav["ratings"]])
                 curr_list.append(fav)
-                sorted_fav_list[fav["search_occasion"]] = curr_list
+                sorted_fav_list[fav["ratings"]] = curr_list
             else:
-                sorted_fav_list[fav["search_occasion"]] = [fav]
+                sorted_fav_list[fav["ratings"]] = [fav]
 
         print("hitting api")
         return render_template(
@@ -62,8 +62,7 @@ def favourites_post(userid=None):
     req_json_body = request.json
 
     favourite_url = ""
-    search_occasion = ""
-    search_weather = ""
+    review = ""
 
     userid = session[contracts.SessionParameters.USERID]
     if contracts.SessionParameters.USERID not in session:
@@ -82,14 +81,9 @@ def favourites_post(userid=None):
             contracts.FavouritesContrastRequest.FAVOURITE_URL_KEY
         ]
 
-    if contracts.FavouritesContrastRequest.SEARCH_OCCASION_KEY in req_json_body:
-        search_occasion = req_json_body[
-            contracts.FavouritesContrastRequest.SEARCH_OCCASION_KEY
-        ]
-
-    if contracts.FavouritesContrastRequest.SEARCH_WEATHER_KEY in req_json_body:
-        search_weather = req_json_body[
-            contracts.FavouritesContrastRequest.SEARCH_WEATHER_KEY
+    if contracts.FavouritesContrastRequest.REVIEW_KEY in req_json_body:
+        review = req_json_body[
+            contracts.FavouritesContrastRequest.REVIEW_KEY
         ]
 
     # For the post request.
@@ -101,8 +95,7 @@ def favourites_post(userid=None):
         new_favourite = Favourite(
             userid=userid,
             favourite_url=favourite_url,
-            search_occasion=search_occasion,
-            search_weather=search_weather,
+            review=review,
         )
 
         db.session.add(new_favourite)
@@ -118,31 +111,29 @@ def favourites_post(userid=None):
         # print(favourite_list)
         if favourite_url != "":
             favourite_query = favourite_query.filter_by(favourite_url=favourite_url)
-        if search_occasion != "":
-            favourite_query = favourite_query.filter_by(search_occasion=search_occasion)
-        if search_weather != "":
-            favourite_query = favourite_query.filter_by(search_weather=search_weather)
+        if review != "":
+            favourite_query = favourite_query.filter_by(review=review)
 
         favourite_resp = favourite_query.all()
         # print(favourite_list[0])
 
-        sorted_fav_list = {}
+        # sorted_fav_list = {}
 
-        for row in favourite_resp:
-            fav = json.loads(json.dumps(Favourite.serialize(row)))
+        # for row in favourite_resp:
+        #     fav = json.loads(json.dumps(Favourite.serialize(row)))
 
-            if fav["search_occasion"] in sorted_fav_list.keys():
-                curr_list = list(sorted_fav_list[fav["search_occasion"]])
-                curr_list.append(fav)
-                sorted_fav_list[fav["search_occasion"]] = curr_list
-            else:
-                sorted_fav_list[fav["search_occasion"]] = [fav]
+        #     if fav["ratings"] in sorted_fav_list.keys():
+        #         curr_list = list(sorted_fav_list[fav["ratings"]])
+        #         curr_list.append(fav)
+        #         sorted_fav_list[fav["ratings"]] = curr_list
+        #     else:
+        #         sorted_fav_list[fav["ratings"]] = [fav]
 
         print("hitting api")
         return render_template(
             "favourites.html",
             user=current_user,
-            sorted_fav_list=sorted_fav_list,
+            sorted_fav_list=favourite_resp,
             enumerate=enumerate,
         )
 
@@ -186,3 +177,24 @@ def delete_favourite():
     else:
         return jsonify({'error': 'Favourite not found'}), 404
     return jsonify({'error': 'Favourite URL not provided'}), 400
+
+@favouritesbp.route('/favreview', methods=['POST'])
+def post_review():
+    data = request.get_json()
+    userid = session.get(contracts.SessionParameters.USERID)
+
+    review = data.get('review')
+
+    # Find the favourite entry by userid and favourite_url
+    favourite_url = data.get('url')  # You need to pass the URL from the front end
+
+    favourite_entry = Favourite.query.filter_by(userid=userid, favourite_url=favourite_url).first()
+    
+    if favourite_entry:
+        # Update the existing entry
+        favourite_entry.review = review
+        db.session.commit()
+        return jsonify({'message': 'Review updated successfully'}), 200
+    else:
+        # Optionally handle cases where the favourite entry does not exist
+        return jsonify({'message': 'Favourite entry not found'}), 404

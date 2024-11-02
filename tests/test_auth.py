@@ -256,3 +256,4 @@ def test_signup_invalid_age_above_90(app):
     response_data = response.data.decode("utf-8")
     assert "Please enter a valid age" in response.data.decode("utf-8")
     assert "ERROR" in response.data.decode("utf-8")
+

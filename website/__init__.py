@@ -7,19 +7,19 @@ db = SQLAlchemy()
 # db_overlay = None
 
 
-def create_app(test_conifg=None):
+def create_app(test_config=None):
     app = Flask(__name__)
     app.config["SECRET_KEY"] = "akjdnauhdbas asdnabdbaskd"
     # app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
 
     app.config["SQLALCHEMY_DATABASE_URI"] = (
-        "mysql+pymysql://root:password@localhost:3306/fashion"
+        "mysql+pymysql://admin:0311@localhost:3306/fashion"
     )
 
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-    if test_conifg:
-        app.config["SECRET_KEY"] = test_conifg["SECRET_KEY"]
-        app.config["SQLALCHEMY_DATABASE_URI"] = test_conifg["SQLALCHEMY_DATABASE_URI"]
+    if test_config:
+        app.config["SECRET_KEY"] = test_config["SECRET_KEY"]
+        app.config["SQLALCHEMY_DATABASE_URI"] = test_config["SQLALCHEMY_DATABASE_URI"]
 
     db.init_app(app)
 
