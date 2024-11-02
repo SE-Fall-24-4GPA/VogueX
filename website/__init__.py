@@ -1,3 +1,12 @@
+# VogueX
+# Copyright (c) 2024 Group 84: Gokul Prakash Ramesh, Haricharan Bharathi, Raghunandan Ganesh Mante
+# This project is licensed under the MIT License.
+# #
+# Governance Model:
+# This project follows an open governance model, which includes a leadership team,
+# contribution guidelines, a code of conduct, and a clear decision-making process.
+# Contributions are welcome, and please see CONTRIBUTING.md for details.
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
@@ -13,7 +22,7 @@ def create_app(test_conifg=None):
     # app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
 
     app.config["SQLALCHEMY_DATABASE_URI"] = (
-        "mysql+pymysql://root:password@localhost:3306/fashion"
+        "mysql+pymysql://root:Gprv#2468@localhost:3306/fashion"
     )
 
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
