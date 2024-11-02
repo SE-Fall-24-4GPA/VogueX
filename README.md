@@ -36,7 +36,7 @@ Contributions are welcome, and please see CONTRIBUTING.md for details.
 [![github workflow](https://github.com/NC-State-24/VogueX/actions/workflows/main.yml/badge.svg)](https://github.com/NC-State-24/VogueX/actions/workflows/main.yml)
 
 [![Black Formatting](https://github.com/NC-State-24/VogueX/actions/workflows/format.yml/badge.svg)](https://github.com/NC-State-24/VogueX/actions/workflows/format.yml)
-[![Build Status](https://circleci.com/gh/NC-State-24/VogueX.svg?style=svg)](https://circleci.com/gh/NC-State-24/VogueX/tree/master)
+[![Build Status](https://circleci.com/gh/NC-State-24/VogueX.svg?style=svg)](https://app.circleci.com/organization/circleci/DxsXpwKSZUv8WE3VKZ4stk)
 # Fashion Recommender: A Style for Every Story 🌦👗
 
 Have you ever picked out the perfect outfit for a big day, only to realize the weather had other plans? Or maybe you wished your wardrobe knew just when to swap out those summer florals for cozy winter knits?
