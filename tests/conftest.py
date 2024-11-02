@@ -21,7 +21,7 @@ def create_app():
     app = Flask(__name__)
     app.config["SECRET_KEY"] = "hjshjhdjah kjshkjdhjs"
     app.config["SQLALCHEMY_DATABASE_URI"] = (
-        "mysql+pymysql://fashion:fashion@localhost/fashion_test"
+        "mysql+pymysql://admin:0311@localhost/fashion_test"
     )
 
     import website.views
@@ -45,7 +45,7 @@ def app():
     app = create_app(
         test_config={
             "SECRET_KEY": "hjshjhdjah kjshkjdhjs",
-            "SQLALCHEMY_DATABASE_URI": "mysql+pymysql://fashion:fashion@localhost/fashion_test",
+            "SQLALCHEMY_DATABASE_URI": "mysql+pymysql://admin:0311@localhost/fashion_test",
         }
     )
     yield app

@@ -51,6 +51,14 @@ drop table user_details;
 drop table preference;
 drop table recommendation;
 
+create table favourite (
+    id int not null primary key AUTO_INCREMENT,
+    userid int not null,
+    favourite_url varchar(255) not null,
+    search_occasion varchar(255) not null,
+    search_weather varchar(255) not null,
+    foreign key (userid) references user(id));
+
 create table user(
     id int not null primary key AUTO_INCREMENT,
     email varchar(255) not null unique,

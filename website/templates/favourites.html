@@ -21,16 +21,83 @@
             </div>
         </div>
         <div class="container flow">
-
             <div class="page-title">Tailor made, just for you.</div>
             <p class="page-subtitle"></p>
         </div>
     </div>
+</div>
+<div class="container flow">
+{% if sorted_fav_list %}
+    {% for idx, occasion in enumerate(sorted_fav_list) %}
+        <div class="media-scroller snaps-inline top-buffer">
+            {% for idx2, j in enumerate(sorted_fav_list[occasion]) %}
+                <div class="media-element">
+                    <img src="{{ sorted_fav_list[occasion][idx2]['favourite_url'] }}" class="favourite-image" data-favourite-url="{{ sorted_fav_list[occasion][idx2]['favourite_url'] }}">
+                    <button type="button" class="blendbtn btn btn-danger delete-favourite rounded m-3" aria-label="Remove Favourite" id="{{ occasion }}{{ idx2 }}"><b>Remove Favourite</b></button>
 
-</div >
+                    <!-- Reviews Section -->
+                    <div class="reviews-section" style="width: 100%;">
+                        <div class="review-input">
+                            <textarea placeholder="Write your review here..." class="review-text" rows="3" style="width: 100%; color: white; background-color: rgba(0, 0, 0, 0.5);"></textarea>
+                            <button type="button" class="btn btn-primary submit-review" style="width: 100%; margin-top: 10px;">Submit Review</button>
+                        </div>
+                        <div class="review-display" style="display: none; margin-top: 10px;">
+                            <p class="submitted-review" style="color: white; background-color: rgba(0, 0, 0, 0.5);"></p>
+                        </div>
+                    </div>                    
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+{% else %}
+    <div style="position: relative; display: inline-block;">
+        <img src="/static/images/dog.jpg" alt="Description" style="width: 100%; height: auto;">
+        <h2 style="position: absolute; top: 20%; left: 60%; color: white; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); font-size: 2vw;">
+            Oopsie-daisy! 🐾 No favorites in sight! Time to sprinkle in some fabulous ones!
+        </h2>
+    </div>
+{% endif %}
 </div>
 
-	<div class="container flow">
+<script>
+    document.querySelectorAll('.submit-review').forEach(button => {
+        button.addEventListener('click', function() {
+            const reviewSection = this.closest('.reviews-section');
+            const reviewText = reviewSection.querySelector('.review-text').value;
+
+            const mediaElement = this.closest('.media-element');
+            const url = mediaElement.querySelector('.favourite-image').getAttribute('data-favourite-url');
+
+            // Prepare data to send
+            const data = {
+                review: reviewText,
+                url: url
+            };
+
+            // Send data to the server using fetch
+            fetch('/favreview', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                
+                // Update the review display
+                reviewSection.querySelector('.submitted-review').textContent = "Review: " + reviewText;
+                reviewSection.querySelector('.review-input').style.display = 'none'; // Hide input
+                reviewSection.querySelector('.review-display').style.display = 'block'; // Show display
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        });
+    });
+</script>
+	<!-- <div class="container flow">
     {% if sorted_fav_list %}
         {% for idx, occasion in enumerate(sorted_fav_list) %}
             <!-- <h3>{{ occasion }}</h3> -->
@@ -49,7 +116,7 @@
     <img src="/static/images/dog.jpg" alt="Description" style="width: 100%; height: auto;">
     <h2 style="position: absolute; top: 20%; left: 60%; color: white; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); font-size: 2vw;">
         Oopsie-daisy! 🐾 No favorites in sight! Time to sprinkle in some fabulous ones!
-    </h2>
+    </h2> -->
 </div>
 
 <style>
@@ -64,6 +131,15 @@
     flex: 0 0 auto;
     scroll-snap-align: start;
     margin-right: 10px;
+}
+.review-text {
+    color: white; /* White text color */
+    background-color: rgba(0, 0, 0, 0.5); /* Slightly transparent background for contrast */
+}
+.submitted-review {
+    color: white; /* White text color for submitted review */
+    background-color: rgba(0, 0, 0, 0.5); /* Optional: add background for contrast */
+    padding: 5px; /* Optional: add some padding for better appearance */
 }
 </style>
 

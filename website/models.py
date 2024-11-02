@@ -33,5 +33,22 @@ class Favourite(db.Model, UserMixin, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     userid = db.Column(db.Integer)
     favourite_url = db.Column(db.String(255))
-    search_occasion = db.Column(db.String(255))
-    search_weather = db.Column(db.String(255))
+    ratings = db.Column(db.Integer)
+    review = db.Column(db.String(500))
+
+class Review(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    userid = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)  # Assuming you have a User model
+    favourite_url = db.Column(db.String(255), nullable=False)  # Ensure this matches the Favourite URL
+    rating = db.Column(db.Integer, nullable=False)
+    comment = db.Column(db.Text, nullable=True)
+
+    @staticmethod
+    def serialize(review):
+        return {
+            "id": review.id,
+            "userid": review.userid,
+            "favourite_url": review.favourite_url,
+            "rating": review.rating,
+            "comment": review.comment
+        }
