@@ -22,7 +22,7 @@ Contributions are welcome, and please see CONTRIBUTING.md for details.
 
 [![Github Repo size in bytes](https://img.shields.io/github/languages/code-size/NC-State-24/VogueX)](https://github.com/NC-State-24/VogueX)
 
-[![codecov](https://codecov.io/gh/NC-State-24/VogueX/branch/master/graph/badge.svg?token=O08MSPU0WT)](https://codecov.io/gh/NC-State-24/VogueX)
+[https://img.shields.io/badge/codecovt-89.3-blue](https://codecov.io/gh/NC-State-24/VogueX)
 
 [![DOI](https://zenodo.org/badge/568223471.svg)](https://zenodo.org/badge/latestdoi/568223471)
 
