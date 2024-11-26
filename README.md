@@ -85,24 +85,34 @@ Get to know your fashion profile! Dive into our analytics to understand your mos
 
 ## 1. Prerequisites
 Python 3.12+
+
 Docker
+
 Ollama
 
 ## 2. Local Setup
 `git clone https://github.com/yourusername/voguex.git`
+
 `cd voguex`
+
 `python -m venv venv`
+
 `source venv/bin/activate  # Windows: venv\Scripts\activate`
+
 `pip install -r requirements.txt`
+
 `cp .env.copy .env  # Configure your API keys`
+
 
 ## 3. Docker Setup
 `docker build -t voguex .`
+
 `docker run -it -p 8501:8501 --add-host=host.docker.internal:host-gateway voguex`
 
 Access at http://localhost:8501
 
-Note
+Note:
+
 Ensure Ollama is running locally before starting the application.
 
 
