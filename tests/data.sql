@@ -1,1 +1,0 @@
-insert into user_details (user_id, firstname, lastname, age, city) values ("1234", "Elon", "Musk", 50, "LA");
