@@ -1,39 +1,41 @@
-from typing import Optional
-from pydantic import BaseModel
+import json
 import requests
+
 from config import Config
 
 
-class WeatherTool(BaseModel):
-    api_key: str = Config.OPENWEATHER_API_KEY
-    base_url: str = "http://api.openweathermap.org/data/2.5/weather"
+class WeatherTool:
+    api_key = Config.WEATHER_API_KEY
 
-    def get_weather(self, city: str) -> Optional[dict]:
+    @staticmethod
+    def get_current_weather(location: str, date="today"):
         """
-        Get current weather for a city using OpenWeather API.
-        Returns temperature in Celsius, weather description, humidity, and wind speed.
+        :param location: city name
+        :param date: today, tomorrow, or any specific date
+        :return: Returns the weather at the specified location at the specified date
         """
         try:
-            params = {
-                'q': city,
-                'appid': self.api_key,
-                'units': 'metric'  # Use metric units (Celsius)
-            }
+            print(WeatherTool.api_key)
+            url = f'https://api.weatherapi.com/v1/current.json?key={WeatherTool.api_key}&q={location}&dt={date}'
+            response = requests.get(url)
 
-            response = requests.get(self.base_url, params=params)
-            response.raise_for_status()
+            if response.status_code == 200:
+                weather_info = response.json()
 
-            data = response.json()
+            else:
+                weather_info = {"Error": "failed to get weather data"}
 
-            return {
-                "temperature": data['main']['temp'],
-                "feels_like": data['main']['feels_like'],
-                "description": data['weather'][0]['description'],
-                "humidity": data['main']['humidity'],
-                "wind_speed": data['wind']['speed'],
-                "main_weather": data['weather'][0]['main']
-            }
+            return json.dumps(weather_info)
 
-        except requests.exceptions.RequestException as e:
-            print(f"Error fetching weather: {e}")
-            return None
+        except Exception as e:
+            return json.dumps({"Error": str(e)})
+
+
+# Test function
+
+def test_weather():
+    tool = WeatherTool()
+    print(tool.get_current_weather("london", "today"))
+
+if __name__ == '__main__':
+    test_weather()
