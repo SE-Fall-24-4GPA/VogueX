@@ -148,3 +148,5 @@ libncursesw5-dev
 # Dataset
 datasets/fashion-dataset/
 website/datasets
+
+data/
