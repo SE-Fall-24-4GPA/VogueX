@@ -83,52 +83,27 @@ Get to know your fashion profile! Dive into our analytics to understand your mos
 
 ## 🚀 Installation Procedure
 
-## 1. Prerequisites 
+## 1. Prerequisites
+Python 3.12+
+Docker
+Ollama
 
-Guides on how to install:
-  * [Git Installation Guide](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-  * Install python virtual environment if needed, if you do not want to hurt the python libraries on your system. 
-  for Linux:
-  
-  `sudo apt-get install python3-virtualenv`
-  
-  Create virtualenv:
-  
-  `python3 -m venv venv` 
+## 2. Local Setup
+`git clone https://github.com/yourusername/voguex.git`
+`cd voguex`
+`python -m venv venv`
+`source venv/bin/activate  # Windows: venv\Scripts\activate`
+`pip install -r requirements.txt`
+`cp .env.copy .env  # Configure your API keys`
 
-  Activate the virtual environment:
+## 3. Docker Setup
+`docker build -t voguex .`
+`docker run -it -p 8501:8501 --add-host=host.docker.internal:host-gateway voguex`
 
-  `source venv/bin/activate` 
+Access at http://localhost:8501
 
-## 2. Deploying
-
-First, clone the repository:
-
-  `https://github.com/NC-State-24/VogueX.git` 
-
-
-Change working directory to the repository:
-x
-  `cd VogueX`
-
-
-For integration of mysql:
-
-  update __init__.py with credentials for mysql
-
-  and run the SQL schema
-
-
-We have made a python script to run the application.
-Just run 
-
-  `python3 main.py`
-
-
-### 3. Follow the provided address and enjoy!
-
-
-http://localhost:5000/
+Note
+Ensure Ollama is running locally before starting the application.
 
 
 ## Contributors:
