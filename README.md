@@ -14,58 +14,53 @@ Contributions are welcome, and please see CONTRIBUTING.md for details.
 
 
 
-[![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://github.com/NC-State-24/VogueX/blob/master/README.md)
+[![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://github.com/SE-Fall-24-4GPA/VogueX/blob/master/README.md)
 
-<a href="https://github.com/SE-Fall-24-4GPA/VogueX/blob/master/LICENSE.md">
-  <img src="https://img.shields.io/github/license/SE-Fall-24-4GPA/VogueX?style=flat-square" alt="License">
+<a href="https://github.comSE-Fall-24-4GPA/VogueX/blob/master/LICENSE.md">
+  <img src="https://img.shields.io/github/licenseSE-Fall-24-4GPA/VogueX?style=flat-square" alt="License">
 </a>
 
-[![Github Repo size in bytes](https://img.shields.io/github/languages/code-size/NC-State-24/VogueX)](https://github.com/NC-State-24/VogueX)
+[![Github Repo size in bytes](https://img.shields.io/github/languages/code-size/SE-Fall-24-4GPA/VogueX)](https://github.com/SE-Fall-24-4GPA/VogueX)
 
 ![Code](https://img.shields.io/badge/codecov-89.3-blue?logo=codecov)
 
 [![DOI](https://zenodo.org/badge/568223471.svg)](https://zenodo.org/badge/latestdoi/568223471)
 
 
-[![GitHub issues](https://img.shields.io/github/issues/NC-State-24/VogueX)](https://github.com/NC-State-24/VogueX/issues?q=is%3Aopen)
-[![GitHub closed issues](https://img.shields.io/github/issues-closed/NC-State-24/VogueX)](https://github.com/NC-State-24/VogueX/issues?q=is%3Aissue+is%3Aclosed)
-[![Github pull requests](https://img.shields.io/github/issues-pr/NC-State-24/VogueX)](https://github.com/NC-State-24/VogueX/pulls)
-[![Github closed pull requests](https://img.shields.io/github/issues-pr-closed/NC-State-24/VogueX)](https://github.com/NC-State-24/VogueX/pulls?q=is%3Apr+is%3Aclosed)
+[![GitHub issues](https://img.shields.io/github/issues/SE-Fall-24-4GPA/VogueX)](https://github.com/SE-Fall-24-4GPA/VogueX/issues?q=is%3Aopen)
+[![GitHub closed issues](https://img.shields.io/github/issues-closed/SE-Fall-24-4GPA/VogueX)](https://github.com/SE-Fall-24-4GPA/VogueX/issues?q=is%3Aissue+is%3Aclosed)
+[![Github pull requests](https://img.shields.io/github/issues-pr/SE-Fall-24-4GPA/VogueX)](https://github.com/SE-Fall-24-4GPA/VogueX/pulls)
+[![Github closed pull requests](https://img.shields.io/github/issues-pr-closed/SE-Fall-24-4GPA/VogueX)](https://github.com/SE-Fall-24-4GPA/VogueX/pulls?q=is%3Apr+is%3Aclosed)
 
 ![Code2](https://img.shields.io/badge/flake8_lint-passing-green)
 ![Code3](https://img.shields.io/badge/Lint_python-passing-green)
 
 
-[![Black Formatting](https://github.com/NC-State-24/VogueX/actions/workflows/format.yml/badge.svg)](https://github.com/NC-State-24/VogueX/actions/workflows/format.yml)
-[![Build Status](https://circleci.com/gh/NC-State-24/VogueX.svg?style=svg)](https://app.circleci.com/organization/circleci/DxsXpwKSZUv8WE3VKZ4stk)
+[![Black Formatting](https://github.com/SE-Fall-24-4GPA/VogueX/actions/workflows/format.yml/badge.svg)](https://github.com/SE-Fall-24-4GPA/VogueX/actions/workflows/format.yml)
+[![Build Status](https://circleci.com/gh/SE-Fall-24-4GPA/VogueX.svg?style=svg)](https://app.circleci.com/organization/circleci/DxsXpwKSZUv8WE3VKZ4stk)
 # Fashion Recommender: A Style for Every Story 🌦👗
 
 Have you ever picked out the perfect outfit for a big day, only to realize the weather had other plans? Or maybe you wished your wardrobe knew just when to swap out those summer florals for cozy winter knits?
 
-**Our Fashion Recommender is here to revolutionize your outfit choices**—not just by helping you stay stylish, but by keeping you comfortable and prepared for whatever the day brings. This isn’t just any fashion recommender; it’s your personal style assistant that thinks ahead.
+**Our Fashion AI Assistant is here to revolutionize your outfit choices**—not just by helping you stay stylish, but by keeping you comfortable and prepared for whatever the day brings. This isn’t just any fashion recommender; it’s your personal style assistant that thinks ahead.
 
-## 🌟 Key Features
 
-1. **Weather-Based Recommendations**: Never get caught off guard again. Our recommender factors in the day’s weather, suggesting whether to avoid certain apparel or carry extra accessories.
-2. **Seasonal Styling**: From spring patterns to fall favorites, get outfits tailored to the season for that on-point, all-year style.
-3. **Occasion-Based Selections**: Whether it's a formal dinner or a laid-back brunch, we’ve got your style covered with top-rated options for every event.
-4. **Favourites Collection**: Keep track of your top picks by adding items to your favourites, and easily manage your collection by adding or removing items as your style evolves.
+## 🔍 Advanced Features with Streamlit, ChromaDB, and Docker
 
-## 🔍 Advanced Personalization with MLops
+1. **Streamlit UI for Enhanced User Experience**: The front-end is now powered by Streamlit, providing an interactive and user-friendly interface for real-time fashion recommendations. No need to deal with traditional HTML and CSS—simply enjoy dynamic, responsive web applications built with Python.
 
-Our Fashion Recommender goes beyond the usual with a robust MLops-powered recommendation pipeline, designed to capture and adapt to your evolving preferences.
+2. **ChromaDB for Efficient Data Handling**: We've replaced MySQL with ChromaDB, ensuring faster and more efficient data storage and retrieval using embeddings. This upgrade enhances the performance of our recommendation engine, especially when managing large datasets for machine learning models and user preferences.
 
-- **User Preference Analytics**: Gain insights into your style and make informed fashion decisions. Our data analytics feature tracks current choices and preferences, ensuring a more personalized experience each time.
-- **User Ratings for Peer Reviews**: Fashion is better with a second opinion! Now, you can review styles and see ratings from others, making sure you’re always putting your best foot forward.
-- **Weather Integration**: Stay comfortable with real-time weather-based outfit suggestions. Rain or shine, our recommender’s got you covered.
+3. **Dockerized for Easy Deployment**: The entire application is Dockerized for streamlined deployment. With Docker, you can run the app in any environment without the hassle of manual configurations, ensuring portability, consistency, and quick scalability.
 
-## 💡 Endless Possibilities for Extension
 
-Our platform is designed to be expanded in countless ways, making it a versatile tool that adapts to your life:
 
-- **Health & Wellness Integration**: Imagine linking with your health app to predict your menstrual cycle and recommend outfits for maximum comfort.
-- **Feedback Mechanism**: Our recommender continuously improves based on your feedback, learning your unique style to offer even better suggestions.
-- **Calendar Sync**: Connect your calendar to stay prepared for special events with tailored outfit suggestions for every occasion.
+## 🔍 Fashion Advice Powered by Ollama and Advanced Integrations
+Our AI Fashion Assistant leverages a cutting-edge LLM model powered by Ollama, seamlessly integrated with enhanced tools to deliver dynamic, personalized fashion recommendations.
+
+1. **User Preference Analytics with ChromaDB**: With ChromaDB handling data storage and retrieval using efficient embeddings, our system continually tracks your evolving style preferences. This ensures accurate, data-driven insights tailored to your unique fashion profile.
+2. **Real-Time Weather Integration**: Stay fashion-forward and comfortable. Our AI assistant considers real-time weather data to offer outfit suggestions that match current conditions, whether it’s sunny, rainy, or chilly.
+
 
 ## 📈 Data Analytics Section
 
@@ -97,7 +92,7 @@ Ollama
 
 `python -m venv venv`
 
-`source venv/bin/activate  # Windows: venv\Scripts\activate`
+`#Linux/Mac: source venv/bin/activate  # Windows: venv\Scripts\activate`
 
 `pip install -r requirements.txt`
 
@@ -121,7 +116,7 @@ command = `ollama serve`
 - Skanda Shastry ()
 - Swapnil Santosh Jakhi (sjakhi)
 
-> This project was completed as part of **Project 3 for the CSC510 Software Engineering** class in the NC State Graduate Program for Computer Science and was built upon the original repository by [NC-State-24/VogueX---Fashion-Recommender](https://github.com/NC-State-24/VogueX).
+> This project was completed as part of **Project 3 for the CSC510 Software Engineering** class in the NC State Graduate Program for Computer Science and was built upon the original repository by [SE-Fall-24-4GPA/VogueX---Fashion-Recommender](https://github.com/SE-Fall-24-4GPA/VogueX).
 
 ## More Details - Documentation
 Please visit the below link for more details on our project and various use cases detailing all the release cycles.
