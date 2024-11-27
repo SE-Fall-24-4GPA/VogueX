@@ -26,6 +26,15 @@ def show_preferences_sidebar():
     with st.sidebar:
         st.title("Style Preferences")
 
+        #Gender input
+        gender = st.selectbox(
+            'Select Gender',
+            ('Male', 'Female', 'Unisex'),
+            key='gender_selection',
+            index=None,
+            placeholder="Choose your gender..."
+        )
+
         # Location input
         location = st.text_input("Location", "London")
 
@@ -52,6 +61,7 @@ def show_preferences_sidebar():
 
         # Update preferences in session state
         st.session_state.user_preferences = {
+            'gender': gender,
             'favorite_colors': colors,
             'preferred_styles': styles,
             'restrictions': restrictions
@@ -60,32 +70,30 @@ def show_preferences_sidebar():
         return location
 
 
-def display_images(image_urls: list):
-    """Display images in a grid layout with improved error handling and styling"""
-    if not image_urls:
+def display_images(image_data: list):
+    """Display images in a grid layout and shopping links in a separate section"""
+    if not image_data:
         return
 
-    # Create columns for images (max 3 columns)
-    num_cols = min(3, len(image_urls))
+    # Images Section
+    st.subheader("Outfit Suggestions")
+    num_cols = min(3, len(image_data))
     cols = st.columns(num_cols)
 
-    for idx, (col, img_url) in enumerate(zip(cols, image_urls)):
+    for idx, (col, img_info) in enumerate(zip(cols, image_data)):
         try:
             with col:
-                # Add a container for better styling
                 with st.container():
-                    # Attempt to load and display the image
-                    response = requests.get(img_url, timeout=5)  # Add timeout
+                    img_url = img_info['image_url'] if isinstance(img_info, dict) else img_info
+                    response = requests.get(img_url, timeout=5)
                     if response.status_code == 200:
                         try:
                             img = Image.open(BytesIO(response.content))
-
-                            # Add some basic styling
-                            st.markdown(f"#### Suggestion {idx + 1}")
+                            st.markdown(f"#### Look {idx + 1}")
                             st.image(
                                 img,
-                                use_container_width=True,  # Updated parameter
-                                output_format="PNG"  # Force PNG format for better quality
+                                use_container_width=True,
+                                output_format="PNG"
                             )
                         except Exception as img_error:
                             st.error(f"Invalid image format: {str(img_error)}")
@@ -98,13 +106,19 @@ def display_images(image_urls: list):
         except Exception as e:
             col.warning(f"Error: {str(e)}")
 
-    # If there are remaining columns, fill them with empty space
-    remaining_cols = num_cols - len(image_urls)
+    # Fill remaining columns
+    remaining_cols = num_cols - len(image_data)
     if remaining_cols > 0:
         for _ in range(remaining_cols):
             with cols[_].container():
                 st.empty()
 
+    # Shopping Links Section
+    st.divider()
+    st.subheader("Where to Shop")
+    for idx, img_info in enumerate(image_data):
+        if isinstance(img_info, dict) and img_info.get('shopping_url'):
+            st.markdown(f"🛍️ [Shop Link {idx + 1}]({img_info['shopping_url']})")
 
 def main():
     st.title('VogueX : A Style for Every Story')

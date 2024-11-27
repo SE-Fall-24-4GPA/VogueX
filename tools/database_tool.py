@@ -56,7 +56,8 @@ class DatabaseManager:
                 name='conversations'
             )
             self.fashion_collection = self.fashion_client.get_or_create_collection(
-                name='fashion'
+                name='fashion',
+                metadata={"hnsw:space": "cosine"}
             )
 
         except Exception as e:
@@ -73,7 +74,7 @@ class DatabaseManager:
             print(f"Error resetting databases: {str(e)}")
             raise
 
-    def store_conversation(self, user_id: str, message: str, response: str):
+    def store_conversation(self, user_id: str, message: str, response: str, gender: str = None):
         try:
             # Get current count for ID generation
             existing = self.conversations_collection.get(
@@ -81,10 +82,16 @@ class DatabaseManager:
             )
             conversation_count = len(existing['documents']) if existing else 0
 
+            metadata = {
+                "user_id": user_id, 
+                "type": "conversation",
+                "gender": gender if gender is not None else "Unisex"
+            }
+
             # Add new conversation
             self.conversations_collection.add(
                 documents=[f"{message}\n{response}"],
-                metadatas=[{"user_id": user_id, "type": "conversation"}],
+                metadatas=[metadata],
                 ids=[f"{user_id}_{conversation_count}"]
             )
         except Exception as e:

@@ -26,6 +26,7 @@ class PromptTemplates:
     Humidity: {humidity}%"""
 
     USER_PREFERENCES_CONTEXT = """User Style Preferences:
+    Gender: {gender}
     Favorite Colors: {favorite_colors}
     Preferred Styles: {preferred_styles}
     Style Restrictions: {restrictions}"""

@@ -46,7 +46,13 @@ class FashionAgent:
     ) -> Tuple[str, List[str]]:
         """
         Generate a fashion recommendation response based on user query and context
-        Returns a tuple of (text_response, image_urls)
+        Returns a tuple of (text_response, outfit_recommendations)
+        where outfit_recommendations is a list of dicts containing:
+        {
+            'image_url': str,
+            'shopping_url': str,
+            'description': str
+        }
         """
         try:
             # Initialize chat history if None
@@ -56,10 +62,14 @@ class FashionAgent:
             # Get weather context
             weather_context = self._get_weather_context(location)
 
+            #Get gender from user prefernces
+            gender = user_preferences.get('gender', 'Unisex')
+
             # Format user preferences if available
             preferences_context = ""
             if user_preferences:
                 preferences_context = self.templates.USER_PREFERENCES_CONTEXT.format(
+                    gender=gender,
                     favorite_colors=user_preferences.get('favorite_colors', 'Not specified'),
                     preferred_styles=user_preferences.get('preferred_styles', 'Not specified'),
                     restrictions=user_preferences.get('restrictions', 'None')
@@ -82,14 +92,22 @@ class FashionAgent:
                 system_prompt=self.templates.SYSTEM_PROMPT
             )
 
+            outfit_recommendations = []
+
+             # Get images for the recommendation
             # Get images for the recommendation
             try:
-                images = self.image_search_tool.search_fashion_images(user_query)
+                # Include gender in the search query
+                search_query = f"{gender} {user_query}" if gender else user_query
+                outfit_recommendations = self.image_search_tool.search_fashion_images(
+                    query=search_query,
+                    max_results=5
+                )
             except Exception as e:
                 print(f"Error getting images: {str(e)}")
-                images = []
+                outfit_recommendations = []
 
-            return response, images
+            return response, outfit_recommendations
 
         except Exception as e:
             print(f"Error generating response: {str(e)}")
