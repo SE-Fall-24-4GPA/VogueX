@@ -16,8 +16,8 @@ Contributions are welcome, and please see CONTRIBUTING.md for details.
 
 [![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://github.com/NC-State-24/VogueX/blob/master/README.md)
 
-<a href="https://github.com/NC-State-24/VogueX/blob/master/LICENSE.md">
-  <img src="https://img.shields.io/github/license/NC-State-24/VogueX?style=flat-square" alt="License">
+<a href="https://github.com/SE-Fall-24-4GPA/VogueX/blob/master/LICENSE.md">
+  <img src="https://img.shields.io/github/license/SE-Fall-24-4GPA/VogueX?style=flat-square" alt="License">
 </a>
 
 [![Github Repo size in bytes](https://img.shields.io/github/languages/code-size/NC-State-24/VogueX)](https://github.com/NC-State-24/VogueX)
@@ -78,7 +78,7 @@ Get to know your fashion profile! Dive into our analytics to understand your mos
 
 ## Demo
 
-[Click here to watch our demo!](https://drive.google.com/file/d/1q5wm0qu7Mw8gSYmC17TGPrOo3cX7KVop/view?usp=sharing) <br>
+
 
 
 ## 🚀 Installation Procedure
@@ -114,14 +114,14 @@ Access at http://localhost:8501
 Note:
 
 Ensure Ollama is running locally before starting the application.
-
+command = `ollama serve`
 
 ## Contributors:
-- Haricharan Bharathi (hbharat2)
-- Gokul Prakash Ramesh (gramesh4)
-- Raghunandan Mante (rmante)
+- Jayesh Gajbhar ()
+- Skanda Shastry ()
+- Swapnil Santosh Jakhi (sjakhi)
 
-> This project was completed as part of **Project 2 for the CSC510 Software Engineering** class in the NC State Graduate Program for Computer Science and was built upon the original repository by [mukunda-p/vogueX---Fashion-Recommender](https://github.com/mukunda-p/vogueX---Fashion-Recommender.git).
+> This project was completed as part of **Project 3 for the CSC510 Software Engineering** class in the NC State Graduate Program for Computer Science and was built upon the original repository by [NC-State-24/VogueX---Fashion-Recommender](https://github.com/NC-State-24/VogueX).
 
 ## More Details - Documentation
 Please visit the below link for more details on our project and various use cases detailing all the release cycles.
