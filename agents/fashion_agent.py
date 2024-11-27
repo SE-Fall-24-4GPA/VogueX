@@ -3,6 +3,7 @@ from utils.prompt_templates import PromptTemplates
 from utils.ollama_client import OllamaClient
 from tools.weather_tool import WeatherTool
 from tools.image_search_tool import ImageSearchTool
+from tools.shop_tool import ShoppingLinkTool
 
 
 class FashionAgent:
@@ -10,17 +11,16 @@ class FashionAgent:
         self.ollama_client = OllamaClient()
         self.weather_tool = WeatherTool()
         self.image_search_tool = ImageSearchTool()
+        self.shopping_tool = ShoppingLinkTool()
         self.templates = PromptTemplates()
 
-        # Validate Ollama connection
         if not self.ollama_client.validate_connection():
-            raise ConnectionError("Could not connect to Ollama server. Please ensure it's running.")
+            raise ConnectionError("Could not connect to Ollama server")
 
     def _get_weather_context(self, location: str = "London") -> str:
-        """Get weather information and format it into context"""
         try:
             weather_data = self.weather_tool.get_current_weather(location)
-            weather_dict = eval(weather_data)  # Convert string to dict
+            weather_dict = eval(weather_data)
 
             if 'Error' in weather_dict:
                 return "Weather information unavailable"
@@ -44,29 +44,13 @@ class FashionAgent:
             occasion: str = "casual",
             user_preferences: Optional[Dict] = None
     ) -> Tuple[str, List[str]]:
-        """
-        Generate a fashion recommendation response based on user query and context
-        Returns a tuple of (text_response, outfit_recommendations)
-        where outfit_recommendations is a list of dicts containing:
-        {
-            'image_url': str,
-            'shopping_url': str,
-            'description': str
-        }
-        """
         try:
-            # Initialize chat history if None
-            if chat_history is None:
-                chat_history = []
-
-            # Get weather context
-            weather_context = self._get_weather_context(location)
-
-            #Get gender from user prefernces
+            chat_history = chat_history or []
             gender = user_preferences.get('gender', 'Unisex')
 
-            # Format user preferences if available
+            weather_context = self._get_weather_context(location)
             preferences_context = ""
+
             if user_preferences:
                 preferences_context = self.templates.USER_PREFERENCES_CONTEXT.format(
                     gender=gender,
@@ -75,7 +59,6 @@ class FashionAgent:
                     restrictions=user_preferences.get('restrictions', 'None')
                 )
 
-            # Create the full query with context
             full_query = self.templates.FASHION_QUERY.format(
                 weather_info=weather_context,
                 occasion=occasion,
@@ -83,32 +66,29 @@ class FashionAgent:
                 user_query=user_query
             )
 
-            # Prepare messages for the chat
             messages = chat_history + [{"role": "user", "content": full_query}]
-
-            # Get response from Ollama
             response = self.ollama_client.generate_chat_completion(
                 messages=messages,
                 system_prompt=self.templates.SYSTEM_PROMPT
             )
 
-            outfit_recommendations = []
+            # Get images and shopping links
+            search_query = f"{gender} {user_query}" if gender else user_query
+            images = self.image_search_tool.search_fashion_images(query=search_query, max_results=5)
 
-             # Get images for the recommendation
-            # Get images for the recommendation
-            try:
-                # Include gender in the search query
-                search_query = f"{gender} {user_query}" if gender else user_query
-                outfit_recommendations = self.image_search_tool.search_fashion_images(
-                    query=search_query,
-                    max_results=5
-                )
-            except Exception as e:
-                print(f"Error getting images: {str(e)}")
-                outfit_recommendations = []
+            shopping_links = self.shopping_tool.generate_shopping_links(
+                query=search_query,
+                style=occasion,
+                price_range='midrange'
+            )
 
-            return response, outfit_recommendations
+            # Add shopping links to image data
+            for idx, image in enumerate(images):
+                if idx < len(shopping_links):
+                    image['shopping_url'] = shopping_links[idx]['url']
+
+            return response, images
 
         except Exception as e:
             print(f"Error generating response: {str(e)}")
-            return "I apologize, but I encountered an error while processing your request. Please try again.", []
+            return "I apologize, but I encountered an error while processing your request.", []
