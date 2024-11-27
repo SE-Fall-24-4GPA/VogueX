@@ -2,93 +2,71 @@ import os
 import shutil
 import chromadb
 from chromadb.config import Settings
-from config import Config
 
 
 class DatabaseManager:
     def __init__(self, reset_if_exists=False):
+        self.conversations_path = 'data/chroma_conversations'
+        self.fashion_path = 'data/chroma_fashion'
+
+        if reset_if_exists:
+            self._reset_databases()
+
+        os.makedirs(self.conversations_path, exist_ok=True)
+        os.makedirs(self.fashion_path, exist_ok=True)
+
+        settings = Settings(
+            anonymized_telemetry=False,
+            is_persistent=True,
+            allow_reset=True
+        )
+
         try:
-            # Define paths
-            self.conversations_path = Config.CHROMA_CONVERSATIONS_PATH
-            self.fashion_path = Config.CHROMA_FASHION_PATH
+            # Force reset existing client instances
+            try:
+                chromadb.reset_persistent()
+            except:
+                pass
 
-            # Reset databases if requested or if there are permission issues
-            if reset_if_exists:
-                self._reset_databases()
-
-            # Ensure directories exist
-            os.makedirs(self.conversations_path, exist_ok=True)
-            os.makedirs(self.fashion_path, exist_ok=True)
-
-            # Initialize settings with allow_reset=True
-            settings = Settings(
-                anonymized_telemetry=False,
-                is_persistent=True,
-                allow_reset=True  # Enable reset functionality
+            self.conversations_client = chromadb.PersistentClient(
+                path=self.conversations_path,
+                settings=settings
             )
 
-            # Initialize clients
-            try:
-                self.conversations_client = chromadb.PersistentClient(
-                    path=self.conversations_path,
-                    settings=settings
-                )
-                self.fashion_client = chromadb.PersistentClient(
-                    path=self.fashion_path,
-                    settings=settings
-                )
-            except ValueError as ve:
-                # If we get a settings mismatch, reset and try again
-                print(f"Settings mismatch detected: {ve}")
-                self._reset_databases()
-                # Try initialization again after reset
-                self.conversations_client = chromadb.PersistentClient(
-                    path=self.conversations_path,
-                    settings=settings
-                )
-                self.fashion_client = chromadb.PersistentClient(
-                    path=self.fashion_path,
-                    settings=settings
-                )
+            self.fashion_client = chromadb.PersistentClient(
+                path=self.fashion_path,
+                settings=settings
+            )
 
             # Initialize collections
-            self.conversations_collection = self.conversations_client.get_or_create_collection(
-                name='conversations'
-            )
-            self.fashion_collection = self.fashion_client.get_or_create_collection(
-                name='fashion',
-                metadata={"hnsw:space": "cosine"}
-            )
+            self.conversations_collection = self.conversations_client.get_or_create_collection('conversations')
+            self.fashion_collection = self.fashion_client.get_or_create_collection('fashion')
 
         except Exception as e:
+            self._reset_databases()
             raise RuntimeError(f"Failed to initialize DatabaseManager: {str(e)}")
 
     def _reset_databases(self):
-        """Reset the database by removing the directories"""
-        try:
-            if os.path.exists(self.conversations_path):
-                shutil.rmtree(self.conversations_path)
-            if os.path.exists(self.fashion_path):
-                shutil.rmtree(self.fashion_path)
-        except Exception as e:
-            print(f"Error resetting databases: {str(e)}")
-            raise
+        """Reset databases by removing directories"""
+        paths = [self.conversations_path, self.fashion_path]
+        for path in paths:
+            if os.path.exists(path):
+                try:
+                    shutil.rmtree(path)
+                except Exception as e:
+                    print(f"Error removing {path}: {str(e)}")
 
     def store_conversation(self, user_id: str, message: str, response: str, gender: str = None):
         try:
-            # Get current count for ID generation
-            existing = self.conversations_collection.get(
-                where={"user_id": user_id}
-            )
+            existing = self.conversations_collection.get(where={"user_id": user_id})
             conversation_count = len(existing['documents']) if existing else 0
 
             metadata = {
-                "user_id": user_id, 
+                "user_id": user_id,
                 "type": "conversation",
-                "gender": gender if gender is not None else "Unisex"
+                "gender": gender if gender else "Unisex"
             }
 
-            # Add new conversation
             self.conversations_collection.add(
                 documents=[f"{message}\n{response}"],
                 metadatas=[metadata],
@@ -110,34 +88,13 @@ class DatabaseManager:
             return []
 
     def clear_all_data(self):
-        """Clear all data from the collections"""
+        """Clear all data from collections"""
         try:
-            # Reset both clients
             self.conversations_client.reset()
             self.fashion_client.reset()
 
-            # Reinitialize collections after reset
-            self.conversations_collection = self.conversations_client.get_or_create_collection(
-                name='conversations'
-            )
-            self.fashion_collection = self.fashion_client.get_or_create_collection(
-                name='fashion'
-            )
+            self.conversations_collection = self.conversations_client.get_or_create_collection('conversations')
+            self.fashion_collection = self.fashion_client.get_or_create_collection('fashion')
         except Exception as e:
             print(f"Error clearing data: {str(e)}")
             raise
-
-
-# Test database tool
-def test_database():
-    try:
-        # Initialize with reset flag
-        db = DatabaseManager(reset_if_exists=True)
-        db.store_conversation('test', 'test message', 'test response')
-        print(db.get_conversation_history('test'))
-    except Exception as e:
-        print(f"Test failed: {str(e)}")
-
-
-if __name__ == '__main__':
-    test_database()
