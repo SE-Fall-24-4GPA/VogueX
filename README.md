@@ -73,7 +73,7 @@ Get to know your fashion profile! Dive into our analytics to understand your mos
 
 ## Demo
 
-
+[Click here to watch our demo!](https://youtu.be/fjKFclSW2Hg) <br>
 
 
 ## 🚀 Installation Procedure
