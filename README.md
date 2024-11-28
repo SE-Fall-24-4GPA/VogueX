@@ -33,7 +33,7 @@ Contributions are welcome, and please see CONTRIBUTING.md for details.
 [![Github closed pull requests](https://img.shields.io/github/issues-pr-closed/SE-Fall-24-4GPA/VogueX)](https://github.com/SE-Fall-24-4GPA/VogueX/pulls?q=is%3Apr+is%3Aclosed)
 
 ![Code2](https://img.shields.io/badge/flake8_lint-passing-green)
-![Pylint](https://github.com/SE-Fall-24-4GPA/VogueX/actions/workflows/pylint.yml)
+[![Pylint](https://github.com/SE-Fall-24-4GPA/VogueX/actions/workflows/pylint.yml)]
 
 
 [![Black Formatting](https://github.com/NC-State-24/VogueX/actions/workflows/format.yml/badge.svg)](https://github.com/SE-Fall-24-4GPA/VogueX/actions/workflows/format.yml)
