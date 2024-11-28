@@ -36,8 +36,8 @@ Contributions are welcome, and please see CONTRIBUTING.md for details.
 ![Code3](https://img.shields.io/badge/Lint_python-passing-green)
 
 
-[![Black Formatting](https://github.com/SE-Fall-24-4GPA/VogueX/actions/workflows/format.yml/badge.svg)](https://github.com/SE-Fall-24-4GPA/VogueX/actions/workflows/format.yml)
-[![Build Status](https://circleci.com/gh/SE-Fall-24-4GPA/VogueX.svg?style=svg)](https://app.circleci.com/organization/circleci/DxsXpwKSZUv8WE3VKZ4stk)
+[![Black Formatting](https://github.com/NC-State-24/VogueX/actions/workflows/format.yml/badge.svg)](https://github.com/SE-Fall-24-4GPA/VogueX/actions/workflows/format.yml)
+[![Build Status](https://circleci.com/gh/NC-State-24/VogueX.svg?style=svg)](https://app.circleci.com/organization/circleci/DxsXpwKSZUv8WE3VKZ4stk)
 # Fashion Recommender: A Style for Every Story 🌦👗
 
 Have you ever picked out the perfect outfit for a big day, only to realize the weather had other plans? Or maybe you wished your wardrobe knew just when to swap out those summer florals for cozy winter knits?
