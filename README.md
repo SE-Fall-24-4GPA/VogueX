@@ -17,7 +17,7 @@ Contributions are welcome, and please see CONTRIBUTING.md for details.
 [![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://github.com/SE-Fall-24-4GPA/VogueX/blob/master/README.md)
 
 <a href="https://github.comSE-Fall-24-4GPA/VogueX/blob/master/LICENSE.md">
-  <img src="https://img.shields.io/github/licenseSE-Fall-24-4GPA/VogueX?style=flat-square" alt="License">
+  <img src="https://img.shields.io/github/license/SE-Fall-24-4GPA/VogueX?style=flat-square" alt="License">
 </a>
 
 [![Github Repo size in bytes](https://img.shields.io/github/languages/code-size/SE-Fall-24-4GPA/VogueX)](https://github.com/SE-Fall-24-4GPA/VogueX)
@@ -55,8 +55,8 @@ Have you ever picked out the perfect outfit for a big day, only to realize the w
 
 
 
-## 🔍 Fashion Advice Powered by Ollama and Advanced Integrations
-Our AI Fashion Assistant leverages a cutting-edge LLM model powered by Ollama, seamlessly integrated with enhanced tools to deliver dynamic, personalized fashion recommendations.
+## 🔍 Fashion Advice Powered by llama3.2 and Advanced Integrations
+Our AI Fashion Assistant leverages a cutting-edge LLM model llama3.2 powered by Ollama, seamlessly integrated with enhanced tools to deliver dynamic, personalized fashion recommendations.
 
 1. **User Preference Analytics with ChromaDB**: With ChromaDB handling data storage and retrieval using efficient embeddings, our system continually tracks your evolving style preferences. This ensures accurate, data-driven insights tailored to your unique fashion profile.
 2. **Real-Time Weather Integration**: Stay fashion-forward and comfortable. Our AI assistant considers real-time weather data to offer outfit suggestions that match current conditions, whether it’s sunny, rainy, or chilly.
@@ -112,11 +112,11 @@ Ensure Ollama is running locally before starting the application.
 command = `ollama serve`
 
 ## Contributors:
-- Jayesh Gajbhar ()
-- Skanda Shastry ()
+- Jayesh Gajbhar (jgajbha)
+- Skanda Shastry (sshastr4)
 - Swapnil Santosh Jakhi (sjakhi)
 
-> This project was completed as part of **Project 3 for the CSC510 Software Engineering** class in the NC State Graduate Program for Computer Science and was built upon the original repository by [SE-Fall-24-4GPA/VogueX---Fashion-Recommender](https://github.com/SE-Fall-24-4GPA/VogueX).
+> This project was completed as part of **Project 3 for the CSC510 Software Engineering** class in the NC State Graduate Program for Computer Science and was built upon the original repository by [NC-State-24/VogueX---Fashion-Recommender](https://github.com/NC-State-24/VogueX).
 
 ## More Details - Documentation
 Please visit the below link for more details on our project and various use cases detailing all the release cycles.

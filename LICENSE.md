@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2024 Haricharan Bharathi, Raghunandan Mante, Gokul Prakash Ramesh
+Copyright (c) 2024 Jayesh Gajbhar, Skanda Shastry, Swapnil Santosh Jakhiss
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
