@@ -1,4 +1,5 @@
 import streamlit as st
+import asyncio
 from agents.fashion_agent import FashionAgent
 from tools.database_tool import DatabaseManager
 import uuid
@@ -20,6 +21,8 @@ def initialize_session_state():
         }
     if 'db_initialized' not in st.session_state:
         st.session_state.db_initialized = False
+    if 'shopping_suggestions' not in st.session_state:
+        st.session_state.shopping_suggestions = []
 
 
 def show_preferences_sidebar():
@@ -67,11 +70,18 @@ def show_preferences_sidebar():
             'restrictions': restrictions
         }
 
+        # Display shopping suggestions if available
+        if st.session_state.shopping_suggestions:
+            st.divider()
+            st.subheader("Shopping Suggestions")
+            for idx, suggestion in enumerate(st.session_state.shopping_suggestions):
+                st.markdown(f"🛍️ [{suggestion['retailer']}]({suggestion['url']})")
+
         return location
 
 
 def display_images(image_data: list):
-    """Display images in a grid layout and shopping links in a separate section"""
+    """Display images in a grid layout"""
     if not image_data:
         return
 
@@ -113,12 +123,23 @@ def display_images(image_data: list):
             with cols[_].container():
                 st.empty()
 
-    # Shopping Links Section
-    st.divider()
-    st.subheader("Where to Shop")
-    for idx, img_info in enumerate(image_data):
-        if isinstance(img_info, dict) and img_info.get('shopping_url'):
-            st.markdown(f"🛍️ [Shop Link {idx + 1}]({img_info['shopping_url']})")
+
+async def process_chat_input(
+    fashion_agent: FashionAgent,
+    prompt: str,
+    location: str,
+    chat_history: list,
+    user_preferences: dict
+):
+    """Process chat input asynchronously"""
+    response_text, images, shopping_links = await fashion_agent.get_response_with_suggestions(
+        user_query=prompt,
+        chat_history=chat_history[:-1],
+        location=location,
+        user_preferences=user_preferences
+    )
+    return response_text, images, shopping_links
+
 
 def main():
     st.title('VogueX : A Style for Every Story')
@@ -158,7 +179,6 @@ def main():
         for message in st.session_state.chat_history:
             with st.chat_message(message["role"]):
                 st.write(message["content"])
-                # Display images if they exist in the message
                 if "images" in message:
                     display_images(message["images"])
 
@@ -171,19 +191,24 @@ def main():
                     "content": prompt
                 })
 
-                # Get response and images from agent
-                response_text, images = fashion_agent.get_response(
-                    user_query=prompt,
-                    chat_history=st.session_state.chat_history[:-1],
-                    location=location,
-                    user_preferences=st.session_state.user_preferences
-                )
+                # Process input asynchronously
+                response_text, images, shopping_links = asyncio.run(process_chat_input(
+                    fashion_agent,
+                    prompt,
+                    location,
+                    st.session_state.chat_history,
+                    st.session_state.user_preferences
+                ))
+
+                # Update shopping suggestions in session state
+                st.session_state.shopping_suggestions = shopping_links
 
                 # Store conversation
                 st.session_state.db_manager.store_conversation(
                     st.session_state.user_id,
                     prompt,
-                    response_text
+                    response_text,
+                    st.session_state.user_preferences.get('gender')
                 )
 
                 # Add assistant response to chat history with images

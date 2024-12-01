@@ -1,9 +1,10 @@
 from typing import Dict, List, Optional, Tuple
+import asyncio
 from utils.prompt_templates import PromptTemplates
 from utils.ollama_client import OllamaClient
 from tools.weather_tool import WeatherTool
 from tools.image_search_tool import ImageSearchTool
-from tools.shop_tool import ShoppingLinkTool
+from .style_analysis_agent import StyleAnalysisAgent
 
 
 class FashionAgent:
@@ -11,19 +12,87 @@ class FashionAgent:
         self.ollama_client = OllamaClient()
         self.weather_tool = WeatherTool()
         self.image_search_tool = ImageSearchTool()
-        self.shopping_tool = ShoppingLinkTool()
+        self.style_agent = StyleAnalysisAgent()
         self.templates = PromptTemplates()
 
-        if not self.ollama_client.validate_connection():
-            raise ConnectionError("Could not connect to Ollama server")
+    async def get_response_with_suggestions(
+            self,
+            user_query: str,
+            chat_history: Optional[List[Dict[str, str]]] = None,
+            location: str = "London",
+            user_preferences: Optional[Dict] = None
+    ) -> Tuple[str, List[Dict[str, str]], List[Dict[str, str]]]:
+        """
+        Generates response and shopping suggestions in parallel
+        """
+        # Create tasks for parallel execution
+        tasks = [
+            self._generate_response(user_query, chat_history, location, user_preferences),
+            self._get_shopping_suggestions(user_query, user_preferences)
+        ]
 
-    def _get_weather_context(self, location: str = "London") -> str:
+        # Run tasks concurrently
+        response, shopping_links = await asyncio.gather(*tasks)
+
+        # Get images based on style analysis
+        images = self.image_search_tool.search_fashion_images(
+            query=user_query,
+            max_results=5
+        )
+
+        return response, images, shopping_links
+
+    async def _generate_response(
+            self,
+            user_query: str,
+            chat_history: Optional[List[Dict[str, str]]],
+            location: str,
+            user_preferences: Optional[Dict]
+    ) -> str:
+        """Generates conversational response"""
+        weather_context = self._get_weather_context(location)
+        preferences_context = self._format_preferences(user_preferences)
+
+        full_query = self.templates.FASHION_QUERY.format(
+            weather_info=weather_context,
+            occasion="any",  # Now handled by style agent
+            preferences=preferences_context,
+            user_query=user_query
+        )
+
+        messages = (chat_history or []) + [{"role": "user", "content": full_query}]
+        return self.ollama_client.generate_chat_completion(
+            messages=messages,
+            system_prompt=self.templates.SYSTEM_PROMPT
+        )
+
+    async def _get_shopping_suggestions(
+            self,
+            user_query: str,
+            user_preferences: Optional[Dict]
+    ) -> List[Dict[str, str]]:
+        """Gets shopping suggestions using style analysis"""
+        return self.style_agent.get_shopping_suggestions(
+            user_query=user_query,
+            user_preferences=user_preferences
+        )
+
+    def _get_weather_context(self, location: str) -> str:
+        """
+        Gets formatted weather context for the given location
+
+        Args:
+            location: City name or location
+
+        Returns:
+            Formatted weather context string
+        """
         try:
             weather_data = self.weather_tool.get_current_weather(location)
             weather_dict = eval(weather_data)
 
             if 'Error' in weather_dict:
-                return "Weather information unavailable"
+                return "Weather information currently unavailable. Providing general recommendations."
 
             current = weather_dict.get('current', {})
             return self.templates.WEATHER_CONTEXT.format(
@@ -34,61 +103,28 @@ class FashionAgent:
             )
         except Exception as e:
             print(f"Error getting weather context: {str(e)}")
-            return "Weather information unavailable"
+            return "Weather information currently unavailable. Providing general recommendations."
 
-    def get_response(
-            self,
-            user_query: str,
-            chat_history: Optional[List[Dict[str, str]]] = None,
-            location: str = "London",
-            occasion: str = "casual",
-            user_preferences: Optional[Dict] = None
-    ) -> Tuple[str, List[str]]:
+    def _format_preferences(self, preferences: Optional[Dict]) -> str:
+        """
+        Formats user preferences into a structured context string
+
+        Args:
+            preferences: Dictionary containing user preferences
+
+        Returns:
+            Formatted preferences context string
+        """
+        if not preferences:
+            return "No specific style preferences provided."
+
         try:
-            chat_history = chat_history or []
-            gender = user_preferences.get('gender', 'Unisex')
-
-            weather_context = self._get_weather_context(location)
-            preferences_context = ""
-
-            if user_preferences:
-                preferences_context = self.templates.USER_PREFERENCES_CONTEXT.format(
-                    gender=gender,
-                    favorite_colors=user_preferences.get('favorite_colors', 'Not specified'),
-                    preferred_styles=user_preferences.get('preferred_styles', 'Not specified'),
-                    restrictions=user_preferences.get('restrictions', 'None')
-                )
-
-            full_query = self.templates.FASHION_QUERY.format(
-                weather_info=weather_context,
-                occasion=occasion,
-                preferences=preferences_context,
-                user_query=user_query
+            return self.templates.USER_PREFERENCES_CONTEXT.format(
+                gender=preferences.get('gender', 'Unisex'),
+                favorite_colors=', '.join(preferences.get('favorite_colors', [])) or 'Not specified',
+                preferred_styles=', '.join(preferences.get('preferred_styles', [])) or 'Not specified',
+                restrictions=', '.join(preferences.get('restrictions', [])) or 'None'
             )
-
-            messages = chat_history + [{"role": "user", "content": full_query}]
-            response = self.ollama_client.generate_chat_completion(
-                messages=messages,
-                system_prompt=self.templates.SYSTEM_PROMPT
-            )
-
-            # Get images and shopping links
-            search_query = f"{gender} {user_query}" if gender else user_query
-            images = self.image_search_tool.search_fashion_images(query=search_query, max_results=5)
-
-            shopping_links = self.shopping_tool.generate_shopping_links(
-                query=search_query,
-                style=occasion,
-                price_range='midrange'
-            )
-
-            # Add shopping links to image data
-            for idx, image in enumerate(images):
-                if idx < len(shopping_links):
-                    image['shopping_url'] = shopping_links[idx]['url']
-
-            return response, images
-
         except Exception as e:
-            print(f"Error generating response: {str(e)}")
-            return "I apologize, but I encountered an error while processing your request.", []
+            print(f"Error formatting preferences: {str(e)}")
+            return "Error processing style preferences. Using default recommendations."
