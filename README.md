@@ -16,7 +16,7 @@ Contributions are welcome, and please see CONTRIBUTING.md for details.
 
 [![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://github.com/SE-Fall-24-4GPA/VogueX/blob/master/README.md)
 
-<a href="https://github.comSE-Fall-24-4GPA/VogueX/blob/master/LICENSE.md">
+<a href="https://github.com/SE-Fall-24-4GPA/VogueX/blob/master/LICENSE.md">
   <img src="https://img.shields.io/github/license/SE-Fall-24-4GPA/VogueX?style=flat-square" alt="License">
 </a>
 
